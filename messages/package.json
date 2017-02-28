@@ -5,13 +5,17 @@
   "main": "index.js",
   "dependencies": {
     "botbuilder": "^3.4.2",
-    "botbuilder-azure": "0.0.1"
+    "botbuilder-azure": "0.0.1",
+    "dotenv-extended": "^1.0.4",
+    "restify": "^4.3.0",
+    "string-template": "^1.0.0"
   },
   "devDependencies": {
-      "restify": "^4.1.1"
+    "restify": "^4.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startdev": "set NODE_ENV=development&& node index.js"
   },
   "author": "",
   "license": "ISC"
