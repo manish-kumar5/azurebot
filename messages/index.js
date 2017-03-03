@@ -171,7 +171,7 @@ bot.dialog('/',
             session.send(msg);
 
         })
-        .matches('query', (session, args) => {
+        .matches('userquery', (session, args) => {
             var msg = {
                 "type": "message",
                 "attachmentLayout": "carousel",
