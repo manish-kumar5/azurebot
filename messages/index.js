@@ -73,7 +73,7 @@ var accountTemplate = compile(
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-useEmulator = true;
+//useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -85,15 +85,11 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 var bot = new builder.UniversalBot(connector);
 
 const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/924eee0c-8ca1-49a4-b652-9ac5f7d09f9e?subscription-key=7c76b26278854cb1858bb06c58484982&verbose=true';
-                      https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/924eee0c-8ca1-49a4-b652-9ac5f7d09f9e?subscription-key=&verbose=true&spellCheck=true&q=
-//'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/19b3eb0c-58e1-4a2c-a4e7-ae2fce8c79e3?subscription-key=7c76b26278854cb1858bb06c58484982&verbose=true';
+                     
 
 
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 
-/*bot.dialog('/', function (session) {
-    session.send('You said local:' + session.message.text);
-});*/
 
 bot.dialog('/',
     //function(session){session.send('Hello I am bot')}
