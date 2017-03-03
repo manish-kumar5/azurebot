@@ -1,16 +1,16 @@
 var Promise = require('bluebird');
 var policydata = require('./policy.json');
-var accountsdata = require('./accounts.json');
+var beneficiarydata = require('./beneficiary.json');
+var changehistorydata = require('./changehistory.json');
 
 module.exports = {
-    searchPolicy: function (policynumber) {
+    searchPolicy: function (certnumber) {
         return new Promise(function (resolve) {
 
             var _policy;
             for (var i = 0, l = policydata.policies.length; i < l; i++){
                 var obj = policydata.policies[i];
-                console.log(obj.policynumber);
-                if (obj.policynumber === policynumber) {
+                if (obj.certno === certnumber) {
                     _policy = obj;
                     break;
                 }
@@ -21,21 +21,37 @@ module.exports = {
             setTimeout(() => resolve(_policy), 1000);
         });
     },
-    searchAccounts: function (accountnumber) {
+    searchBeneficiary: function (certnumber) {
         return new Promise(function (resolve) {
 
-            var _account;
-            for (var i = 0, l = accountsdata.accounts.length; i < l; i++){
-                var obj = accountsdata.accounts[i];
-                if (obj.accountid === accountnumber) {
-                    _account = obj;
+            var _beneficiary;
+            for (var i = 0, l = beneficiarydata.beneficiaries.length; i < l; i++){
+                var obj = beneficiarydata.beneficiaries[i];
+                if (obj.certno === certnumber) {
+                    _beneficiary = obj;
                     break;
                 }
             }
 
 
             // complete promise with a timer to simulate async response
-            setTimeout(() => resolve(_account), 1000);
+            setTimeout(() => resolve(_beneficiary), 1000);
+        });
+    },
+
+    searchChangehistory: function (certnumber) {
+        return new Promise(function (resolve) {
+
+            var _changehistory;
+            for (var i = 0, l = changehistorydata.changehistory.length; i < l; i++){
+                var obj = changehistorydata.changehistory[i];
+                if (obj.certno === certnumber) {
+                    _changehistory = obj;
+                    break;
+                }
+            }
+            // complete promise with a timer to simulate async response
+            setTimeout(() => resolve(_changehistory), 1000);
         });
     }
 };
