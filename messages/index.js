@@ -73,7 +73,7 @@ var accountTemplate = compile(
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -283,8 +283,8 @@ bot.dialog('/',
             session.send(msg);
         })
         .matches('policyquery', (session, args) => {
-            session.userData.validation = true;
-            session.userData.certno = "000017111984";
+            //session.userData.validation = true;
+            //session.userData.certno = "000017111984";
 
             if (!session.userData.validation) {
                 session.beginDialog('/verifyuser');
@@ -337,13 +337,466 @@ bot.dialog('/',
          Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
         })
 );
-bot.dialog('/verifyuser',
-    new builder.IntentDialog({ recognizers: [recognizer] })
-        .onDefault((session) => {
-            session.send(`![GitHub Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) 
-         Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
-        })
-);
+bot.dialog('/verifyssn',[
+    function (session, args, next) {
+        if(parseInt(session.userData.retry_ssn) == 0){
+            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
+            For Verification purpose please tell us last four degit of your SSN number`);
+        }else{
+            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
+            Oops!! This seems an invalid SSN input. Please provide last four degit of your SSN again`);
+        }
+    },
+    function (session, results) {
+        var ssn = results.response;
+        var beneficiary = store.validateCert(ssn)
+        if(beneficiary){
+            session.userData.ssn = beneficiary.ssn;
+            session.beginDialog('/verifyphone');
+        }else{
+            session.userData.retry_ssn = parseInt(session.userData.retry_ssn) + 1;
+            if(parseInt(session.userData.retry_ssn) > 2){
+                session.beginDialog('/', 'root');
+                var msg = {
+                    "type": "message",
+                    "attachmentLayout": "carousel",
+                    "text": "",
+                    "attachments": [
+                        {
+                            "contentType": "application/vnd.microsoft.card.hero",
+                            "content": {
+                                //"text": "Welcome to Mercer Bot! What can i help you with?",
+                                "title": "Oops!! You have lost all your retries",
+                                "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                            Do you have any further query?`,
+                                "images": [
+                                    {
+                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "type": "postBack",
+                                        "title": "Yes",
+                                        "value": "root"
+                                    },
+                                    {
+                                        "type": "postBack",
+                                        "title": "No",
+                                        "value": "bye"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+                session.send(msg);
+            }else{
+                session.beginDialog('/verifyssn');
+            }
+        }
+    }
+]);
+bot.dialog('/verifyphone',[
+    function (session, args, next) {
+        if(parseInt(session.userData.retry_ssn) == 0){
+            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
+            For Verification purpose please tell us last four degit of your SSN number`);
+        }else{
+            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
+            Oops!! This seems an invalid SSN input. Please provide last four degit of your SSN again`);
+        }
+    },
+    function (session, results) {
+        var ssn = results.response;
+        var beneficiary = store.validateCert(ssn)
+        if(beneficiary){
+            session.userData.ssn = beneficiary.ssn;
+            session.beginDialog('/verifyphone');
+        }else{
+            session.userData.retry_ssn = parseInt(session.userData.retry_ssn) + 1;
+            if(parseInt(session.userData.retry_ssn) > 2){
+                session.beginDialog('/', 'root');
+                var msg = {
+                    "type": "message",
+                    "attachmentLayout": "carousel",
+                    "text": "",
+                    "attachments": [
+                        {
+                            "contentType": "application/vnd.microsoft.card.hero",
+                            "content": {
+                                //"text": "Welcome to Mercer Bot! What can i help you with?",
+                                "title": "Oops!! You have lost all your retries",
+                                "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                            Do you have any further query?`,
+                                "images": [
+                                    {
+                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "type": "postBack",
+                                        "title": "Yes",
+                                        "value": "root"
+                                    },
+                                    {
+                                        "type": "postBack",
+                                        "title": "No",
+                                        "value": "bye"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+                session.send(msg);
+            }else{
+                session.beginDialog('/verifyssn');
+            }
+        }
+    }
+]);
+bot.dialog('/verifycert',[
+    function (session, args, next) {
+        if(parseInt(session.userData.retry_cert) == 0){
+            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
+            For Verification purpose please tell us your certificate number`);
+        }else{
+            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
+            Oops!! This seems an invalid certification number. Please provide your certificate number again`);
+        }
+    },
+    function (session, results) {
+        var certnumber = results.response;
+        var validcert = false;
+        var policy = store.validateCert(certnumber)
+        if(policy){
+            session.userData.certno = certnumber;
+            session.beginDialog('/verifyssn');
+        }else{
+            session.userData.retry_cert = parseInt(session.userData.retry_cert) + 1;
+            if(parseInt(session.userData.retry_cert) > 2){
+                session.beginDialog('/', 'root');
+                var msg = {
+                    "type": "message",
+                    "attachmentLayout": "carousel",
+                    "text": "",
+                    "attachments": [
+                        {
+                            "contentType": "application/vnd.microsoft.card.hero",
+                            "content": {
+                                //"text": "Welcome to Mercer Bot! What can i help you with?",
+                                "title": "Oops!! You have lost all your retries",
+                                "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                            Do you have any further query?`,
+                                "images": [
+                                    {
+                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "type": "postBack",
+                                        "title": "Yes",
+                                        "value": "root"
+                                    },
+                                    {
+                                        "type": "postBack",
+                                        "title": "No",
+                                        "value": "bye"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+                session.send(msg);
+            }else{
+                session.beginDialog('/verifycert');
+            }
+        }
+    }
+]);
+bot.dialog('/verifyuser',[
+    function (session, args, next) {
+        session.userData.retry_cert = 0;
+        session.userData.retry_ssn = 0;
+        session.userData.retry_phone = 0;
+        session.userData.retry_dob = 0; 
+        session.beginDialog('/verifycert')
+       
+    }
+    
+    /*,
+    function (session, results) {
+        var certnumber = results.response;
+        var validcert = false;
+        for(var i=0; i<3; i++){
+            /*if(i!=0){
+                builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                Certificate provided by you is not valid. Please try again.`);
+            }*/
+     /*       var policy = store.validateCert(certnumber)
+            if(policy){
+                session.userData.certno = certnumber;
+                validcert = true;
+                break;
+            }
+            else{
+                builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                Certificate provided by you is not valid. Please try again.`);
+            }
+        }
+        if(validcert == true){
+             builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                For Verification purpose please tell us last four digits of your SSN Number`);
+        }else{
+            session.beginDialog('/', 'root');
+            var msg = {
+                "type": "message",
+                "attachmentLayout": "carousel",
+                "text": "",
+                "attachments": [
+                    {
+                        "contentType": "application/vnd.microsoft.card.hero",
+                        "content": {
+                            //"text": "Welcome to Mercer Bot! What can i help you with?",
+                            "title": "Oops!! You have lost all your retries",
+                            "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                        Do you have any further query?`,
+                            "images": [
+                                {
+                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                }
+                            ],
+                            "buttons": [
+                                {
+                                    "type": "postBack",
+                                    "title": "Yes",
+                                    "value": "root"
+                                },
+                                {
+                                    "type": "postBack",
+                                    "title": "No",
+                                    "value": "bye"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+            session.send(msg);
+        }
+    },
+    function (session, results) {
+        var ssn = results.response;
+        var validssn = false;
+        for(var i=0; i<3; i++){
+            if(i!=0){
+                session.send( `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                Last four digit of SSN provided by you is not valid. Please try again.`);
+            }
+            var beneficiary = store.validateSSN(ssn)
+            if(beneficiary){
+                session.userData.ssn = beneficiary.ssn;
+                validssn = true;
+                break;
+            }
+        }
+        if(validssn == true){
+             builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                For Verification purpose please tell us your phone Number`);
+        }else{
+            session.beginDialog('/', 'root');
+            var msg = {
+                "type": "message",
+                "attachmentLayout": "carousel",
+                "text": "",
+                "attachments": [
+                    {
+                        "contentType": "application/vnd.microsoft.card.hero",
+                        "content": {
+                            //"text": "Welcome to Mercer Bot! What can i help you with?",
+                            "title": "Oops!! You have lost all your retries",
+                            "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                        Do you have any further query?`,
+                            "images": [
+                                {
+                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                }
+                            ],
+                            "buttons": [
+                                {
+                                    "type": "postBack",
+                                    "title": "Yes",
+                                    "value": "root"
+                                },
+                                {
+                                    "type": "postBack",
+                                    "title": "No",
+                                    "value": "bye"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+            session.send(msg);
+        }        
+    },
+    function (session, results) {
+        var phone = results.response;
+        var validphone = false;
+        for(var i=0; i<3; i++){
+            if(i!=0){
+                builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                Phone number provided by you is not valid. Please try again.`);
+            }
+            var phone = store.validatePhone(phone)
+            if(phone){
+                session.userData.phone = phone;
+                validphone = true;
+                break;
+            }
+        }
+        if(validphone == true){
+             builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                For Verification purpose please tell us your date of birth in MM\DD\YYYY format`);
+        }else{
+            session.beginDialog('/', 'root');
+            var msg = {
+                "type": "message",
+                "attachmentLayout": "carousel",
+                "text": "",
+                "attachments": [
+                    {
+                        "contentType": "application/vnd.microsoft.card.hero",
+                        "content": {
+                            //"text": "Welcome to Mercer Bot! What can i help you with?",
+                            "title": "Oops!! You have lost all your retries",
+                            "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                        Do you have any further query?`,
+                            "images": [
+                                {
+                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                }
+                            ],
+                            "buttons": [
+                                {
+                                    "type": "postBack",
+                                    "title": "Yes",
+                                    "value": "root"
+                                },
+                                {
+                                    "type": "postBack",
+                                    "title": "No",
+                                    "value": "bye"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+            session.send(msg);
+        }        
+    },
+    function (session, results) {
+        var dob = results.response;
+        var validdob = false;
+        for(var i=0; i<3; i++){
+            if(i!=0){
+                builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n
+                Date of birth provided by you is not valid. Please try again.`);
+            }
+            var dob = store.validateDOB(dob)
+            if(dob){
+                session.userData.dob = dob;
+                validdob = true;
+                break;
+            }
+        }
+        if(validdob == true){
+                session.userData.validation = true;
+                session.beginDialog('/policy', 'policyquery');
+                session.send("Hurrey!! Thanks for providing all the details. Your verification is successful!!")
+                var msg = {
+                    "type": "message",
+                    "attachmentLayout": "carousel",
+                    "text": "",
+                    "attachments": [
+                        {
+                            "contentType": "application/vnd.microsoft.card.hero",
+                            "content": {
+                                //"text": "Welcome to Mercer Bot! What can i help you with?",
+                                "title": "Beneficiary Query",
+                                "subtitle": "Please select from below query options on which you need help?",
+                                "images": [
+                                    {
+                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                    }
+                                ],
+                                "buttons": [
+                                    {
+                                        "type": "postBack",
+                                        "title": "Policy Information",
+                                        "value": "Policy Information"
+                                    },
+                                    {
+                                        "type": "postBack",
+                                        "title": "Beneficiary Information",
+                                        "value": "Beneficiary Information"
+                                    },
+                                    {
+                                        "type": "postBack",
+                                        "title": "Policy Change History",
+                                        "value": "Change History"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+                session.send(msg);
+        }else{
+            session.beginDialog('/', 'root');
+            var msg = {
+                "type": "message",
+                "attachmentLayout": "carousel",
+                "text": "",
+                "attachments": [
+                    {
+                        "contentType": "application/vnd.microsoft.card.hero",
+                        "content": {
+                            //"text": "Welcome to Mercer Bot! What can i help you with?",
+                            "title": "Oops!! You have lost all your retries",
+                            "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                        Do you have any further query?`,
+                            "images": [
+                                {
+                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
+                                }
+                            ],
+                            "buttons": [
+                                {
+                                    "type": "postBack",
+                                    "title": "Yes",
+                                    "value": "root"
+                                },
+                                {
+                                    "type": "postBack",
+                                    "title": "No",
+                                    "value": "bye"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+            session.send(msg);
+        }        
+    }  */      
+]);
 bot.dialog('/policy',
     new builder.IntentDialog({ recognizers: [recognizer] })
         .matches('beneficiaryinformation', (session, args) => {
@@ -353,6 +806,7 @@ bot.dialog('/policy',
                 .then((beneficiary) => {
                     session.beginDialog('/', 'root');
                     if (beneficiary) {
+                        
                         //var msg = beneficiaryTemplate(policynumber, policy.policyname, policy.policyduration, policy.validupto, policy.startdate, policy.enddate, policy.premium, policy.currency, policy.commission);
                         var msg = beneficiaryTemplate(beneficiary.name, beneficiary.address, beneficiary.dob, beneficiary.phone);
                         session.send(msg);
@@ -409,7 +863,7 @@ bot.dialog('/policy',
                                             {
                                                 "type": "postBack",
                                                 "title": "Yes",
-                                                "value": "Policy Information"
+                                                "value": "Policy Query"
                                             },
                                             {
                                                 "type": "postBack",
@@ -492,7 +946,7 @@ bot.dialog('/policy',
                                             {
                                                 "type": "postBack",
                                                 "title": "Yes",
-                                                "value": "Policy Information"
+                                                "value": "Policy Query"
                                             },
                                             {
                                                 "type": "postBack",
@@ -574,7 +1028,7 @@ bot.dialog('/policy',
                                             {
                                                 "type": "postBack",
                                                 "title": "Yes",
-                                                "value": "Policy Information"
+                                                "value": "Policy Query"
                                             },
                                             {
                                                 "type": "postBack",
@@ -626,3 +1080,4 @@ if (useEmulator) {
 } else {
     module.exports = { default: connector.listen() }
 }
+('error',function(err){ console.error(err)})
