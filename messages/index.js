@@ -303,18 +303,15 @@ bot.dialog('/',
         }
         )
         .onDefault((session) => {
-            session.send(`![GitHub Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) 
-         Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
+            session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
         })
 );
 bot.dialog('/verifyssn', [
     function (session, args, next) {
         if (parseInt(session.userData.retry_ssn) == 0) {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            For Verification purpose please tell us last four degit of your SSN number`);
+            builder.Prompts.text(session, `For Verification purpose please tell us last four degit of your SSN number`);
         } else {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            Oops!! This seems an invalid SSN input. Please provide last four degit of your SSN again`);
+            builder.Prompts.text(session, `Oops!! This seems an invalid SSN input. Please provide last four degit of your SSN again`);
         }
     },
     function (session, results) {
@@ -365,11 +362,9 @@ bot.dialog('/verifyssn', [
 bot.dialog('/verifyphone', [
     function (session, args, next) {
         if (parseInt(session.userData.retry_phone) == 0) {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            For Verification purpose please tell us your telephone number`);
+            builder.Prompts.text(session, `For Verification purpose please tell us your telephone number`);
         } else {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            Oops!! This seems an invalid telephone number. Please provide your Telephone number again`);
+            builder.Prompts.text(session, `Oops!! This seems an invalid telephone number. Please provide your Telephone number again`);
         }
     },
     function (session, results) {
@@ -420,11 +415,9 @@ bot.dialog('/verifyphone', [
 bot.dialog('/verifydob', [
     function (session, args, next) {
         if (parseInt(session.userData.retry_dob) == 0) {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            For Verification purpose please tell us your date of birth in MM/DD/YYYY format`);
+            builder.Prompts.text(session, `For Verification purpose please tell us your date of birth in MM/DD/YYYY format`);
         } else {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            Oops!! This seems an invalid date of birth according to our records. Please provide your date of birth again in MM/DD/YYYY format`);
+            builder.Prompts.text(session, `Oops!! This seems an invalid date of birth according to our records. Please provide your date of birth again in MM/DD/YYYY format`);
         }
     },
     function (session, results) {
@@ -509,11 +502,9 @@ bot.dialog('/verifydob', [
 bot.dialog('/verifycert', [
     function (session, args, next) {
         if (parseInt(session.userData.retry_cert) == 0) {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            For Verification purpose please tell us your certificate number`);
+            builder.Prompts.text(session, `For Verification purpose please tell us your certificate number`);
         } else {
-            builder.Prompts.text(session, `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)
-            Oops!! This seems an invalid certification number. Please provide your certificate number again`);
+            builder.Prompts.text(session, `Oops!! This seems an invalid certification number. Please provide your certificate number again`);
         }
     },
     function (session, results) {
