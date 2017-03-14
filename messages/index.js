@@ -101,11 +101,6 @@ bot.dialog('/',
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
                             "title": "Welcome to Mercer Bot!",
                             "subtitle": "What can i help you with?",
-                            "images": [
-                                {
-                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                }
-                            ],
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -142,11 +137,6 @@ bot.dialog('/',
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
                             "title": "Feedback",
                             "subtitle": "Were the informations provided to you appropriate?",
-                            "images": [
-                                {
-                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                }
-                            ],
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -209,11 +199,6 @@ bot.dialog('/',
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
                             "title": "Please choose one of the options you would like to get help!",
                             "subtitle": "",
-                            "images": [
-                                {
-                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                }
-                            ],
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -250,11 +235,6 @@ bot.dialog('/',
                             "title": "Customer Care Help",
                             "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
                                         Do you have any further query?`,
-                            "images": [
-                                {
-                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                }
-                            ],
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -297,11 +277,6 @@ bot.dialog('/',
                                 //"text": "Welcome to Mercer Bot! What can i help you with?",
                                 "title": "Beneficiary Query",
                                 "subtitle": "Please select from below query options on which you need help?",
-                                "images": [
-                                    {
-                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                    }
-                                ],
                                 "buttons": [
                                     {
                                         "type": "postBack",
@@ -364,11 +339,6 @@ bot.dialog('/verifyssn', [
                                 "title": "Oops!! You have lost all your retries",
                                 "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
                                             Do you have any further query?`,
-                                "images": [
-                                    {
-                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                    }
-                                ],
                                 "buttons": [
                                     {
                                         "type": "postBack",
@@ -424,11 +394,6 @@ bot.dialog('/verifyphone', [
                                 "title": "Oops!! You have lost all your retries",
                                 "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
                                             Do you have any further query?`,
-                                "images": [
-                                    {
-                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                    }
-                                ],
                                 "buttons": [
                                     {
                                         "type": "postBack",
@@ -480,11 +445,6 @@ bot.dialog('/verifydob', [
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
                             "title": "Beneficiary Query",
                             "subtitle": "Please select from below query options on which you need help?",
-                            "images": [
-                                {
-                                    "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                }
-                            ],
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -523,11 +483,6 @@ bot.dialog('/verifydob', [
                                 "title": "Oops!! You have lost all your retries",
                                 "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
                                             Do you have any further query?`,
-                                "images": [
-                                    {
-                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                    }
-                                ],
                                 "buttons": [
                                     {
                                         "type": "postBack",
@@ -584,11 +539,6 @@ bot.dialog('/verifycert', [
                                 "title": "Oops!! You have lost all your retries",
                                 "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
                                             Do you have any further query?`,
-                                "images": [
-                                    {
-                                        "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                    }
-                                ],
                                 "buttons": [
                                     {
                                         "type": "postBack",
@@ -679,11 +629,6 @@ bot.dialog('/policy',
                                         "title": "Beneficiary Information",
                                         "subtitle": `Sorry!! No beneficiary information is attached to your policy.\n
                                                         Do you have further queries w.r.t. your policy`,
-                                        "images": [
-                                            {
-                                                "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                            }
-                                        ],
                                         "buttons": [
                                             {
                                                 "type": "postBack",
@@ -762,11 +707,6 @@ bot.dialog('/policy',
                                         "title": "Policy Information",
                                         "subtitle": `Sorry!! No policy information found.\n
                                                         Do you have further queries w.r.t. your policy`,
-                                        "images": [
-                                            {
-                                                "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                            }
-                                        ],
                                         "buttons": [
                                             {
                                                 "type": "postBack",
@@ -844,11 +784,6 @@ bot.dialog('/policy',
                                         "title": "Policy Information",
                                         "subtitle": `Sorry!! No change history found.\n
                                                         Do you have further queries w.r.t. your policy`,
-                                        "images": [
-                                            {
-                                                "url": "http://mercertestbot.azurewebsites.net/images/chatbot.jpg"
-                                            }
-                                        ],
                                         "buttons": [
                                             {
                                                 "type": "postBack",
@@ -874,8 +809,7 @@ bot.dialog('/policy',
                 });
         })
         .onDefault((session) => {
-            session.send(`![GitHub Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) 
-            Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
+            session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
         })
 
 );
