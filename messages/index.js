@@ -18,9 +18,7 @@ Do visit again!! Bye & Take care..
 `
 
 var policyTemplate = compile(
-    `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n \n
-Policy details for certificate number {0} as follows: \n \n
-   \n
+    `Policy details for certificate number {0} as follows: 
 **Policy Name:**    {1}\n
 **TPA:**    {2}\n
 **Policy Duration:**    {3}\n
@@ -33,9 +31,7 @@ Policy details for certificate number {0} as follows: \n \n
 `);
 
 var beneficiaryTemplate = compile(
-    `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)\n\n
-   \n
-Beneficiary details as follows:\n\n
+    `Beneficiary details as follows:\n\n
    \n
 **Beneficiary Name:**   \t {0}\n
 **Address:** \t{1}\n
@@ -45,8 +41,7 @@ Beneficiary details as follows:\n\n
 );
 
 var historyTemplate = compile(
-    `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg)\n\n
-   \n
+    `
 Policy change history details as follows:\n\n
    \n
 **Information Updated:**   \t {0}\n
@@ -57,8 +52,7 @@ Policy change history details as follows:\n\n
 )
 
 var accountTemplate = compile(
-    `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) 
-### I have found the account details for account number - {0}  
+    `### I have found the account details for account number - {0}  
 ** Details as follows: **
 > Account Holder Name: *{1}*\n
 > Registered Policies: *{2}*\n
