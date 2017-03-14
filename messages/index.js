@@ -68,7 +68,7 @@ var accountTemplate = compile(
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -426,11 +426,11 @@ bot.dialog('/verifydob', [
         if (beneficiary) {
             session.userData.validation = true;
             session.beginDialog('/policy', 'policyquery');
-            session.send("Hurrey!! Thanks for providing all the details. Your verification is successful!!")
+            //session.send("Hurrey!! Thanks for providing all the details. Your verification is successful!!")
             var msg = {
                 "type": "message",
                 "attachmentLayout": "carousel",
-                "text": "",
+                "text": "Hurrey!! Thanks for providing all the details. Your verification is successful!!",
                 "attachments": [
                     {
                         "contentType": "application/vnd.microsoft.card.hero",
