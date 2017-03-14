@@ -151,12 +151,12 @@ bot.dialog('/',
                                 {
                                     "type": "postBack",
                                     "title": "Yes",
-                                    "value": "query"
+                                    "value": "circleback"
                                 },
                                 {
                                     "type": "postBack",
                                     "title": "No",
-                                    "value": "query"
+                                    "value": "circleback"
                                 }
                             ]
                         }
@@ -166,7 +166,7 @@ bot.dialog('/',
             session.send(msg);
 
         })
-        .matches('userquery', (session, args) => {
+        .matches('circleback', (session, args) => {
             var msg = {
                 "type": "message",
                 "attachmentLayout": "carousel",
@@ -634,11 +634,11 @@ bot.dialog('/policy',
 
                         //var msg = beneficiaryTemplate(policynumber, policy.policyname, policy.policyduration, policy.validupto, policy.startdate, policy.enddate, policy.premium, policy.currency, policy.commission);
                         var msg = beneficiaryTemplate(beneficiary.name, beneficiary.address, beneficiary.dob, beneficiary.phone);
-                        session.send(msg);
+                        //session.send(msg);
                         var msg = {
                             "type": "message",
                             "attachmentLayout": "carousel",
-                            "text": "",
+                            "text": msg,
                             "attachments": [
                                 {
                                     "contentType": "application/vnd.microsoft.card.hero",
@@ -717,11 +717,11 @@ bot.dialog('/policy',
                     if (policy) {
                         //var msg = beneficiaryTemplate(policynumber, policy.policyname, policy.policyduration, policy.validupto, policy.startdate, policy.enddate, policy.premium, policy.currency, policy.commission);
                         var msg = policyTemplate(session.userData.certno, policy.policyname, policy.tpa, policy.policyduration, policy.validupto, policy.startdate, policy.enddate, policy.premium, policy.currency, policy.commission);
-                        session.send(msg);
+                        //session.send(msg);
                         var msg = {
                             "type": "message",
                             "attachmentLayout": "carousel",
-                            "text": "",
+                            "text": msg,
                             "attachments": [
                                 {
                                     "contentType": "application/vnd.microsoft.card.hero",
@@ -799,11 +799,11 @@ bot.dialog('/policy',
                     session.beginDialog('/', 'root');
                     if (history) {
                         var msg = historyTemplate(history.infoupdated, history.previousvalue, history.updatedvalue, history.updatedate);
-                        session.send(msg);
+                        //session.send(msg);
                         var msg = {
                             "type": "message",
                             "attachmentLayout": "carousel",
-                            "text": "",
+                            "text": msg,
                             "attachments": [
                                 {
                                     "contentType": "application/vnd.microsoft.card.hero",
