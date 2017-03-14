@@ -10,7 +10,7 @@
         },
         {
             "name": "Anna",
-            "dob":"12/30/1988",
+            "dob":"12-30-1988",
             "ssn": "10001414",
             "address": "191-103 Integer Rd. Corona New Mexico 08219",
             "phone": "3333333333",
@@ -18,7 +18,7 @@
         },
         {
             "name": "Paul",
-            "dob":"03/12/1990",
+            "dob":"03-12-1990",
             "ssn": "10002345",
             "address": "347-7666 Iaculis St. Woodruff SC 49854",
             "phone": "1234567890",
@@ -26,7 +26,7 @@
         },
         {
             "name": "Oliver",
-            "dob":"09/12/1991",
+            "dob":"09-12-1991",
             "ssn": "10005678",
             "address": "511-5762 At Rd. Chelsea MI 67708",
             "phone": "2222222222",

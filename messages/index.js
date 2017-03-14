@@ -12,11 +12,9 @@ var compile = require("string-template/compile");
 
 var thanks =
     ` ![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n \n
-
 Thanks for contacting us \n
 For any further help Please reach out to our 24x7 customer care **@ 1800-3452-3452** \n
 Do visit again!! Bye & Take care.. 
-
 `
 
 var policyTemplate = compile(
@@ -43,7 +41,6 @@ Beneficiary details as follows:\n\n
 **Address:** \t{1}\n
 **Date of Birth:** \t{2}\n
 **Telephone:** \t{3}\n
-
 `
 );
 
@@ -56,7 +53,6 @@ Policy change history details as follows:\n\n
 **Previous Value:** \t{1}\n
 **Updated Value:** \t{2}\n
 **Updated Date:** \t{3}\n
-
 `
 )
 
@@ -64,7 +60,6 @@ var accountTemplate = compile(
     `![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) 
 ### I have found the account details for account number - {0}  
 ** Details as follows: **
-
 > Account Holder Name: *{1}*\n
 > Registered Policies: *{2}*\n
 > Create Date: *{3}*`);
