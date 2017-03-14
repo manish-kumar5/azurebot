@@ -2,7 +2,7 @@
     "beneficiaries": [
         {
             "name": "John",
-            "dob":"11/17/1984",
+            "dob":"11-17-1984",
             "ssn": "10001234",
             "address": "123 ABC Dr Urbandale Iowa 12345",
             "phone": "9876543210",
