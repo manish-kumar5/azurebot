@@ -68,7 +68,7 @@ var accountTemplate = compile(
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -141,12 +141,12 @@ bot.dialog('/',
                                 {
                                     "type": "postBack",
                                     "title": "Yes",
-                                    "value": "circleback"
+                                    "value": "circle"
                                 },
                                 {
                                     "type": "postBack",
                                     "title": "No",
-                                    "value": "circleback"
+                                    "value": "circle"
                                 }
                             ]
                         }
