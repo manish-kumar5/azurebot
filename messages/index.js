@@ -11,53 +11,82 @@ var format = require("string-template");
 var compile = require("string-template/compile");
 
 var thanks =
-    ` ![Bot Logo](http://mercertestbot.azurewebsites.net/images/chatbot.jpg) \n \n
-Thanks for contacting us \n
-For any further help Please reach out to our 24x7 customer care **@ 1800-3452-3452** \n
-Do visit again!! Bye & Take care.. 
+    ` <p>
+Thanks for contacting us <br>
+For any further help Please reach out to our 24x7 customer care @ <b>1800-3452-3452<b>
+Do visit again!! Bye & Take care.. </p>
 `
 
 var policyTemplate = compile(
-    `Policy details for certificate number {0} as follows: 
-**Policy Name:**    {1}\n
-**TPA:**    {2}\n
-**Policy Duration:**    {3}\n
-**Valid Upto:**     {4}\n
-**Start Date:**     {5}\n
-**End Date:**   {6}\n
-**Premium Amount:**     {7}\n
-**Currency:**   {8}\n
-**Commission Amount:** {9}\n
+    `<b> Policy details for certificate number {0} as follows: </b> 
+    <table border="0"> 
+        <tr> 
+            <td> Policy Name:</td><td>{1}</td>
+        <tr>
+        <tr> 
+            <td> TPA:</td><td>{2}</td>
+        <tr>    
+        <tr> 
+            <td> Policy Duration:</td><td>{3}</td>
+        <tr>
+        <tr> 
+            <td> Valid Upto:</td><td>{4}</td>
+        <tr>
+        <tr> 
+            <td> Start Date:</td><td>{5}</td>
+        <tr>
+        <tr> 
+            <td> End Date:</td><td>{6}</td>
+        <tr>    
+        <tr> 
+            <td> Premium Amount:</td><td>{7}</td>
+        <tr> 
+        <tr> 
+            <td> Currency:</td><td>{8}</td>
+        <tr> 
+        <tr> 
+            <td> Commission Amount:</td><td>{9}</td>
+        <tr>
+        </table>
 `);
 
 var beneficiaryTemplate = compile(
-    `Beneficiary details as follows:\n\n
-   \n
-**Beneficiary Name:**   \t {0}\n
-**Address:** \t{1}\n
-**Date of Birth:** \t{2}\n
-**Telephone:** \t{3}\n
+    `<b>Beneficiary details as follows:</b>
+<table border="0">
+    <tr> 
+        <td> Beneficiary Name:</td><td>{0}</td>
+    <tr>
+    <tr> 
+        <td> Address:</td><td>{1}</td>
+    <tr>
+    <tr> 
+        <td> Date of Birth:</td><td>{2}</td>
+    <tr>
+    <tr> 
+        <td> Telephone:</td><td>{3}</td>
+    <tr>
+</table>
 `
 );
 
 var historyTemplate = compile(
-    `
-Policy change history details as follows:\n\n
-   \n
-**Information Updated:**   \t {0}\n
-**Previous Value:** \t{1}\n
-**Updated Value:** \t{2}\n
-**Updated Date:** \t{3}\n
+`
+<b>Policy change history details as follows:</b>
+<table border="0">
+    <tr> 
+        <td> Information Updated:</td><td>{0}</td>
+    <tr>
+    <tr> 
+        <td> Previous Value:</td><td>{1}</td>
+    <tr>
+    <tr> 
+        <td> Updated Value:</td><td>{2}</td>
+    <tr>
+    <tr> 
+        <td> Updated Date:</td><td>{3}</td>
+    <tr>
 `
 )
-
-var accountTemplate = compile(
-    `### I have found the account details for account number - {0}  
-** Details as follows: **
-> Account Holder Name: *{1}*\n
-> Registered Policies: *{2}*\n
-> Create Date: *{3}*`);
-
 
 
 var useEmulator = (process.env.NODE_ENV == 'development');
@@ -813,7 +842,7 @@ bot.use({
             });
     }
 });
-var instructions = `I am BEN, your AI support representative. What I can help you with today? <br> You can choose from below options or type your question in the input box<br>
+var instructions = `<b>I am BEN, your AI support representative. What I can help you with today?</b> <br><br> You can choose from below options or type your question in the input box<br>
                 <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
                 <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
                 <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
