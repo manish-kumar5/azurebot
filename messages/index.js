@@ -842,7 +842,7 @@ bot.use({
             });
     }
 });
-var instructions = `<b>I am BEN, your AI support representative. What I can help you with today?</b> <br><br> You can choose from below options or type your question in the input box<br>
+var instructions = `<b> <p>I am BEN, your AI support representative. What I can help you with today?</p></b> <br><br> Note: You can choose from below options or type your question in the input box<br>
                 <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
                 <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
                 <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
