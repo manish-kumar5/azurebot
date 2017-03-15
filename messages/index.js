@@ -62,7 +62,7 @@ var accountTemplate = compile(
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -813,38 +813,11 @@ bot.use({
             });
     }
 });
-var instructions = {
-                "type": "message",
-                "attachmentLayout": "carousel",
-                "text": "I am BEN, your AI support representative. What I can help you with today? <br> You can choose from below options or type your question in the input box",
-                "attachments": [
-                    {
-                        "contentType": "application/vnd.microsoft.card.hero",
-                        "content": {
-                            //"text": "Welcome to Mercer Bot! What can i help you with?",
-                            "title": "",
-                            "subtitle": "",
-                            "buttons": [
-                                {
-                                    "type": "postBack",
-                                    "title": "Policy Query",
-                                    "value": "Policy Query"
-                                },
-                                {
-                                    "type": "postBack",
-                                    "title": "Payment Query",
-                                    "value": "Payment"
-                                },
-                                {
-                                    "type": "postBack",
-                                    "title": "Website Issue",
-                                    "value": "Website Issue"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
+var instructions = `I am BEN, your AI support representative. What I can help you with today? <br> You can choose from below options or type your question in the input box<br>
+                <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
+                <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
+                <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
+                
 
 bot.on('conversationUpdate', function (activity) {
     // when user joins conversation, send instructions
