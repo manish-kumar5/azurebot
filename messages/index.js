@@ -813,7 +813,40 @@ bot.use({
             });
     }
 });
-var instructions = 'Good evening; I am BEN, your AI support representative. Can I get your name and what I can help you with today?';
+var instructions = '';
+
+var msg = {
+                "type": "message",
+                "attachmentLayout": "carousel",
+                "text": "I am BEN, your AI support representative. What I can help you with today? <br> You can choose from below options or type your question in the input box",
+                "attachments": [
+                    {
+                        "contentType": "application/vnd.microsoft.card.hero",
+                        "content": {
+                            //"text": "Welcome to Mercer Bot! What can i help you with?",
+                            "title": "",
+                            "subtitle": "",
+                            "buttons": [
+                                {
+                                    "type": "postBack",
+                                    "title": "Policy Query",
+                                    "value": "Policy Query"
+                                },
+                                {
+                                    "type": "postBack",
+                                    "title": "Payment Query",
+                                    "value": "Payment"
+                                },
+                                {
+                                    "type": "postBack",
+                                    "title": "Website Issue",
+                                    "value": "Website Issue"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
 
 bot.on('conversationUpdate', function (activity) {
     // when user joins conversation, send instructions
