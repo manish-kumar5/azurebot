@@ -813,9 +813,7 @@ bot.use({
             });
     }
 });
-var instructions = '';
-
-var msg = {
+var instructions = {
                 "type": "message",
                 "attachmentLayout": "carousel",
                 "text": "I am BEN, your AI support representative. What I can help you with today? <br> You can choose from below options or type your question in the input box",
