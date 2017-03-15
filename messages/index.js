@@ -813,6 +813,21 @@ bot.use({
             });
     }
 });
+var instructions = 'Good evening; I am BEN, your AI support representative. Can I get your name and what I can help you with today?';
+
+bot.on('conversationUpdate', function (activity) {
+    // when user joins conversation, send instructions
+    if (activity.membersAdded) {
+        activity.membersAdded.forEach(function (identity) {
+            if (identity.id === activity.address.bot.id) {
+                var reply = new builder.Message()
+                    .address(activity.address)
+                    .text(instructions);
+                bot.send(reply);
+            }
+        });
+    }
+});
 
 if (useEmulator) {
     var restify = require('restify');
