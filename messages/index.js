@@ -336,7 +336,7 @@ bot.dialog('/',
                                                 <p>Please choose from below options or type your question in the input box<br>
                     <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
                     <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
-                    <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`)
+                    <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`, session.message.text);
              session.endDialog(); 
         })
         .onDefault((session) => {
@@ -613,7 +613,7 @@ bot.dialog('/policy',
                                                 <p>Please choose from below options or type your question in the input box<br>
                     <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
                     <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
-                    <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`)
+                    <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`, session.message.text)
              session.endDialog(); 
         })
         .matches('beneficiaryinformation', (session, args) => {
