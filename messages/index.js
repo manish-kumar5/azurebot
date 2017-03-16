@@ -112,6 +112,18 @@ var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 bot.dialog('/',
     //function(session){session.send('Hello I am bot')}
     new builder.IntentDialog({ recognizers: [recognizer] })
+        .matches('usercontext',(session, args) =>{
+            var usercontext = JSON.parse(session.message.text);
+            session.userData.username = usercontext.username;
+            session.userData.ssn = usercontext.ssn;
+            session.userData.telephone = usercontext.telephone;
+            session.userData.certno = usercontext.cert;
+            session.userData.address = usercontext.address;
+            session.userData.dob = usercontext.dob;
+            session.userData.validation = true;
+
+            session.send("UserContext Successful", session.message.text);
+        })
         .matches('welcome', (session, args) => {
             var msg = {
                 "type": "message",
