@@ -325,6 +325,9 @@ bot.dialog('/',
             }
         }
         )
+        .matches('newconverse',(session, args) => {
+            session.beginDialog('/', 'root');
+        })
         .onDefault((session) => {
             session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
         })
@@ -588,6 +591,9 @@ bot.dialog('/verifyuser', [
 ]);
 bot.dialog('/policy',
     new builder.IntentDialog({ recognizers: [recognizer] })
+        .matches('newconverse',(session, args) => {
+            session.beginDialog('/', 'root');
+        })
         .matches('beneficiaryinformation', (session, args) => {
             // Async search
             store
@@ -842,7 +848,7 @@ bot.use({
             });
     }
 });
-var instructions = `<b> <p>I am BEN, your AI support representative. What I can help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
+var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
                 <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
                 <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
                 <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
