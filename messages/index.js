@@ -337,7 +337,7 @@ bot.dialog('/',
                     <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
                     <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
                     <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`, session.message.text);
-             session.endDialog(); 
+             //session.endDialog(); 
         })
         .onDefault((session) => {
             session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
@@ -614,7 +614,7 @@ bot.dialog('/policy',
                     <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
                     <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
                     <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`, session.message.text)
-             session.endDialog(); 
+            // session.endDialog(); 
         })
         .matches('beneficiaryinformation', (session, args) => {
             // Async search
