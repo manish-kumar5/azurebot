@@ -11,15 +11,17 @@ var format = require("string-template");
 var compile = require("string-template/compile");
 
 var thanks =
-    ` <p>
-Thanks for contacting us <br>
-For any further help Please reach out to our 24x7 customer care @ <b>1800-3452-3452<b>
-Do visit again!! Bye & Take care.. </p>
-`
+`Thanks for contacting us <br>
+For any further help Please reach out to our 24x7 customer care @ <b>1800-3452-3452</b>
+Do visit again!! Bye & Take care..
+`;
 
 var policyTemplate = compile(
     `<b> Policy details for certificate number {0} as follows: </b> 
     <table border="0"> 
+        <tr> 
+            <td>Attributes </td><td>Value </td>
+        </tr>
         <tr> 
             <td> Policy Name:</td><td>{1}</td>
         <tr>
@@ -54,6 +56,9 @@ var beneficiaryTemplate = compile(
     `<b>Beneficiary details as follows:</b>
 <table border="0">
     <tr> 
+        <td>Attributes </td><td>Value </td>
+    </tr>
+    <tr> 
         <td> Beneficiary Name:</td><td>{0}</td>
     <tr>
     <tr> 
@@ -74,6 +79,9 @@ var historyTemplate = compile(
 <b>Policy change history details as follows:</b>
 <table border="0">
     <tr> 
+        <td>Attributes </td><td>Value </td>
+    </tr>
+    <tr> 
         <td> Information Updated:</td><td>{0}</td>
     <tr>
     <tr> 
@@ -86,7 +94,7 @@ var historyTemplate = compile(
         <td> Updated Date:</td><td>{3}</td>
     <tr>
 `
-)
+);
 
 
 var useEmulator = (process.env.NODE_ENV == 'development');
@@ -134,8 +142,8 @@ bot.dialog('/',
                         "contentType": "application/vnd.microsoft.card.hero",
                         "content": {
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
-                            "title": "Welcome to Mercer Bot!",
-                            "subtitle": "What can i help you with?",
+                            "title": "",
+                            "subtitle": "What can i help you with" + session.userData.username + "?",
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -171,7 +179,7 @@ bot.dialog('/',
                         "content": {
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
                             "title": "Feedback",
-                            "subtitle": "Were the informations provided to you appropriate?",
+                            "subtitle": session.userData.username + ", were the informations provided to you appropriate?",
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -201,7 +209,7 @@ bot.dialog('/',
                         "contentType": "application/vnd.microsoft.card.hero",
                         "content": {
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
-                            "title": "Do you have any further query?",
+                            "title": session.userData.username + ", Do you have any further query?",
                             "subtitle": "",
                             "buttons": [
                                 {
@@ -232,7 +240,7 @@ bot.dialog('/',
                         "contentType": "application/vnd.microsoft.card.hero",
                         "content": {
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
-                            "title": "Please choose one of the options you would like to get help!",
+                            "title": session.userData.username + ", Please choose one of the options you would like to get help!",
                             "subtitle": "",
                             "buttons": [
                                 {
@@ -311,7 +319,7 @@ bot.dialog('/',
                             "content": {
                                 //"text": "Welcome to Mercer Bot! What can i help you with?",
                                 "title": "Beneficiary Query",
-                                "subtitle": "Please select from below query options on which you need help?",
+                                "subtitle": session.userData.username + ", I can help you with below options w.r.t. your Policy. Please select the option on which you need help or type your question to the input box provided below",
                                 "buttons": [
                                     {
                                         "type": "postBack",
