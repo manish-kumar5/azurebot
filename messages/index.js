@@ -327,7 +327,17 @@ bot.dialog('/',
         )
         .matches('newconverse',(session, args) => {
             session.beginDialog('/', 'root');
-             session.endDialog();
+            session.send(`<div class="row msg_container base_receive">
+                                        <div class="col-md-2 col-xs-2 avatar">
+                                                <img style="height:40px;width:40px;" src="../images/ben.png" class=" img-responsive "/>
+                                        </div>
+                                        <div class="col-md-10 col-xs-10">
+                                            <div class="messages msg_receive">
+                                                <p>Please choose from below options or type your question in the input box<br>
+                    <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
+                    <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
+                    <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`)
+             session.endDialog(); 
         })
         .onDefault((session) => {
             session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
@@ -594,7 +604,16 @@ bot.dialog('/policy',
     new builder.IntentDialog({ recognizers: [recognizer] })
         .matches('newconverse',(session, args) => {
             session.beginDialog('/', 'root');
-            
+             session.send(`<div class="row msg_container base_receive">
+                                        <div class="col-md-2 col-xs-2 avatar">
+                                                <img style="height:40px;width:40px;" src="../images/ben.png" class=" img-responsive "/>
+                                        </div>
+                                        <div class="col-md-10 col-xs-10">
+                                            <div class="messages msg_receive">
+                                                <p>Please choose from below options or type your question in the input box<br>
+                    <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
+                    <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
+                    <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue"></p>`)
              session.endDialog(); 
         })
         .matches('beneficiaryinformation', (session, args) => {
