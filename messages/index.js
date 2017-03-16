@@ -327,6 +327,7 @@ bot.dialog('/',
         )
         .matches('newconverse',(session, args) => {
             session.beginDialog('/', 'root');
+             session.endDialog();
         })
         .onDefault((session) => {
             session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
@@ -593,6 +594,8 @@ bot.dialog('/policy',
     new builder.IntentDialog({ recognizers: [recognizer] })
         .matches('newconverse',(session, args) => {
             session.beginDialog('/', 'root');
+            
+             session.endDialog(); 
         })
         .matches('beneficiaryinformation', (session, args) => {
             // Async search
