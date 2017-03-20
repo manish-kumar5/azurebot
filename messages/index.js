@@ -143,7 +143,7 @@ bot.dialog('/',
                         "content": {
                             //"text": "Welcome to Mercer Bot! What can i help you with?",
                             "title": "",
-                            "subtitle": "What can i help you with" + session.userData.username + "?",
+                            "subtitle": "What can i help you with " + session.userData.username + "? <br> Please select from below mentiond help topics or type your question in the input box. <br>",
                             "buttons": [
                                 {
                                     "type": "postBack",
@@ -168,6 +168,16 @@ bot.dialog('/',
             session.send(msg);
         }
         )
+
+        .matches('webissue_login', (session, args) => {
+            var msg = "I will definitely help you on this " + session.userData.username + "."
+            session.send(msg, session.message.text);
+        })
+        .matches('webissue_login_invalidcred', (session, args)=>{
+            session.userData.retry_userid = 0;
+            session.beginDialog('/webissue_login_verify_userid');
+
+        })
         .matches('feedback', (session, args) => {
             var msg = {
                 "type": "message",
@@ -363,6 +373,20 @@ bot.dialog('/',
             session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
         })
 );
+
+bot.dialog('webissue', require('./webissue_dialogs/webissue')
+).triggerAction({
+    matches: 'webissue'
+});
+
+bot.dialog('webissue_login', require('./webissue_dialogs/login')
+).triggerAction({
+    matches: 'webissue_login'
+});
+
+bot.dialog('maxretry', require('./commonDialog/maxretry')
+).triggerAction({matches: 'maxretry'});
+
 bot.dialog('/verifyssn', [
     function (session, args, next) {
         if (parseInt(session.userData.retry_ssn) == 0) {
@@ -390,8 +414,8 @@ bot.dialog('/verifyssn', [
                             "contentType": "application/vnd.microsoft.card.hero",
                             "content": {
                                 //"text": "Welcome to Mercer Bot! What can i help you with?",
-                                "title": "Oops!! You have lost all your retries",
-                                "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333\n
+                                "title": "Oops!! You have lost all your retries<br>",
+                                "subtitle": `For any further assistance you can contact our 24x7 customer care on 1800-2333-2333<br>
                                             Do you have any further query?`,
                                 "buttons": [
                                     {
@@ -901,6 +925,7 @@ bot.on('conversationUpdate', function (activity) {
     if (activity.membersAdded) {
         activity.membersAdded.forEach(function (identity) {
             if (identity.id === activity.address.bot.id) {
+                bot.beginDialog(message.address, '/');
                 var reply = new builder.Message()
                     .address(activity.address)
                     .text(instructions);

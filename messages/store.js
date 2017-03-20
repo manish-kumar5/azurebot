@@ -4,6 +4,17 @@ var beneficiarydata = require('./beneficiary.json');
 var changehistorydata = require('./changehistory.json');
 
 module.exports = {
+    validateUserid: function(userid){
+        var _user;
+        for (var i = 0, l = beneficiarydata.beneficiaries.length; i < l; i++){
+                var obj = beneficiarydata.beneficiaries[i];
+                if (obj.user_id === userid) {
+                    _user = obj;
+                    break;
+                }
+            }
+            return _user;
+    },
     validateCert: function(certnumber){
             var _policy;
             for (var i = 0, l = policydata.policies.length; i < l; i++){
