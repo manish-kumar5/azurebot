@@ -4,11 +4,11 @@ var beneficiarydata = require('./beneficiary.json');
 var changehistorydata = require('./changehistory.json');
 
 module.exports = {
-    validateUserid: function(userid){
+    validateUserid: function(userid, username){
         var _user;
         for (var i = 0, l = beneficiarydata.beneficiaries.length; i < l; i++){
                 var obj = beneficiarydata.beneficiaries[i];
-                if (obj.user_id === userid) {
+                if (obj.user_id === userid){ // && obj.name === username) {
                     _user = obj;
                     break;
                 }

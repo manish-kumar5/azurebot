@@ -1,5 +1,5 @@
 var builder = require('botbuilder');
-var Store = require('./store');
+
 
 module.exports = [
     function (session, args, next) {
@@ -7,7 +7,7 @@ module.exports = [
         session.send(msg);
         session.userData.retry_userid = 0;
         session.endDialog();
-        session.beginDialog('/');
+        //session.beginDialog('/');
     }
 ];
 

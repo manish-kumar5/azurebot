@@ -132,6 +132,9 @@ bot.dialog('/',
 
             session.send("UserContext Successful", session.message.text);
         })
+        .matches('webissue', (session, args) => {
+            session.beginDialog('webissue');
+        })
         .matches('welcome', (session, args) => {
             var msg = {
                 "type": "message",
@@ -170,13 +173,7 @@ bot.dialog('/',
         )
 
         .matches('webissue_login', (session, args) => {
-            var msg = "I will definitely help you on this " + session.userData.username + "."
-            session.send(msg, session.message.text);
-        })
-        .matches('webissue_login_invalidcred', (session, args)=>{
-            session.userData.retry_userid = 0;
-            session.beginDialog('/webissue_login_verify_userid');
-
+            session.beginDialog('webissue_login');
         })
         .matches('feedback', (session, args) => {
             var msg = {
@@ -386,6 +383,17 @@ bot.dialog('webissue_login', require('./webissue_dialogs/login')
 
 bot.dialog('maxretry', require('./commonDialog/maxretry')
 ).triggerAction({matches: 'maxretry'});
+
+bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({matches: 'feedback'});
+bot.dialog('root', require('./commonDialog/root')).triggerAction({matches:'root'});
+bot.dialog('thanks', [
+    function(session, args, next){
+        var msg = thanks;
+        session.send(msg);
+        session.endDialog();
+    }
+]).triggerAction({matches: 'thanks'});
+
 
 bot.dialog('/verifyssn', [
     function (session, args, next) {
@@ -925,11 +933,12 @@ bot.on('conversationUpdate', function (activity) {
     if (activity.membersAdded) {
         activity.membersAdded.forEach(function (identity) {
             if (identity.id === activity.address.bot.id) {
-                bot.beginDialog(message.address, '/');
+                
                 var reply = new builder.Message()
                     .address(activity.address)
                     .text(instructions);
                 bot.send(reply);
+                //bot.beginDialog(activity.address, '/');
             }
         });
     }

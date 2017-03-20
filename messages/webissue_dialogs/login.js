@@ -1,5 +1,5 @@
 var builder = require('botbuilder');
-var Store = require('./store');
+var store = require('../store');
 
 module.exports = [
     function (session, args, next) {
@@ -13,7 +13,7 @@ module.exports = [
     },
     function (session, results) {
         var loginid = results.response;
-        var validuserid = store.validateUserid(userid);
+        var validuserid = store.validateUserid(loginid, session.userData.username);
         if (validuserid) {
             var passreset_msg = "<b>" + session.userData.username + "</b>,  The user id provided by you is correct as per our records. It seems the problem is with password. Can i reset your password?<br>";
             passreset_msg += '<input type="button" onclick="hello(this)" value="Yes" id="Yes">&nbsp;<input type="button" onclick="hello(this)" value="No" id="No">';
@@ -36,10 +36,8 @@ module.exports = [
     },
     function (session, results) {
         if (results.response) {
-            var reset_resp = results.response;
+            var reset_resp = results.response.entity;
             if (reset_resp == "No") {
-                session.endDialog();
-                session.beginDialog('/');
                 var msg = {
                     "type": "message",
                     "attachmentLayout": "carousel",
@@ -56,28 +54,51 @@ module.exports = [
                                     {
                                         "type": "postBack",
                                         "title": "Yes",
-                                        "value": "root"
+                                        "value": "Yes"
                                     },
                                     {
                                         "type": "postBack",
                                         "title": "No",
-                                        "value": "bye"
+                                        "value": "No"
                                     }
                                 ]
                             }
                         }
                     ]
                 }
-                session.send(msg);
+                builder.Prompts.choice(session, msg, "Yes|No",
+                {
+                    maxRetries: 3,
+                    retryPrompt: 'Not a valid option'
+                });
             }else{
                 var msg = "<b>" + session.userData.username + "</b>, Your password has been reset to <b>1234</b>. Please click below login link to try again. Also please reset your password after successful login<br> <a href='#'>Login</a><br> ";
-                msg += "Is there anything else i can help you with?";
-
-                session.endDialog();
-                session.beginDialog('/');
-                sesion.send(msg);
+                msg += "Do you have any further query? <br>";
+                msg += '<input type="button" onclick="hello(this)" value="Yes" id="Yes">&nbsp;<input type="button" onclick="hello(this)" value="No" id="No">';
+                builder.Prompts.choice(session, msg, "Yes|No",
+                {
+                    maxRetries: 3,
+                    retryPrompt: 'Not a valid option'
+                });
             }
         } else {
+            session.endDialog();
+            session.beginDialog('maxretry');
+        }
+    },
+    function(session, results){
+        console.log('Manish:' + results.response.entity);
+        if(results.response){
+            if(results.response.entity === "No"){
+                session.endDialog();
+                session.beginDialog('feedback');
+            }else{
+                session.endDialog();
+                session.beginDialog('root');
+            }
+
+        }else{
+            session.endDialog();
             session.beginDialog('maxretry');
         }
     }
