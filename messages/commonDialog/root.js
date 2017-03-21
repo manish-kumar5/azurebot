@@ -12,8 +12,8 @@ module.exports = [
                     "contentType": "application/vnd.microsoft.card.hero",
                     "content": {
                         //"text": "Welcome to Mercer Bot! What can i help you with?",
-                        "title": session.userData.username + ", Please choose one of the options you would like to get help!",
-                        "subtitle": "",
+                        "title": "",
+                        "subtitle": "<b>" + session.userData.username + "</b>, Please choose one of the options you would like to get help!",
                         "buttons": [
                             {
                                 "type": "postBack",

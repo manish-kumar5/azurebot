@@ -16,7 +16,7 @@ module.exports = [
                     "contentType": "application/vnd.microsoft.card.hero",
                     "content": {
                         //"text": "Welcome to Mercer Bot! What can i help you with?",
-                        "title": "Beneficiary Query",
+                        "title": "Policy Query",
                         "subtitle": session.userData.username + ", I can help you with below options w.r.t. your Policy. Please select the option on which you need help or type your question to the input box provided below",
                         "buttons": [
                             {
