@@ -99,7 +99,7 @@ var historyTemplate = compile(
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-useEmulator = true;
+//useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
