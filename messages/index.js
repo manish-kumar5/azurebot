@@ -7,10 +7,10 @@ var botbuilder_azure = require("botbuilder-azure");
 var restify = require('restify');
 var store = require('./store');
 var spellService = require('./spell-service');
-var format = require("string-template");
-var compile = require("string-template/compile");
+//var format = require("string-template");
+//var compile = require("string-template/compile");
 
-var thanks =
+/*var thanks =
 `Thanks for contacting us <br>
 For any further help Please reach out to our 24x7 customer care @ <b>1800-3452-3452</b>
 Do visit again!! Bye & Take care..
@@ -95,11 +95,11 @@ var historyTemplate = compile(
     <tr>
 `
 );
-
+*/
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -115,12 +115,13 @@ const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/
 
 
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
+bot.recognizer(recognizer);
 
-
-bot.dialog('/',
+//bot.dialog('init', require('./commonDialog/init')).triggerAction({matches: 'init'});
+//bot.dialog('/', require('./commonDialog/init')).triggerAction({matches:'/'});
     //function(session){session.send('Hello I am bot')}
-    new builder.IntentDialog({ recognizers: [recognizer] })
-        .matches('usercontext',(session, args) =>{
+    //new builder.IntentDialog({ recognizers: [recognizer] })
+        /*.matches('usercontext',(session, args) =>{
             var usercontext = JSON.parse(session.message.text);
             session.userData.username = usercontext.username;
             session.userData.ssn = usercontext.ssn;
@@ -131,9 +132,6 @@ bot.dialog('/',
             session.userData.validation = true;
 
             session.send("UserContext Successful", session.message.text);
-        })
-        .matches('webissue', (session, args) => {
-            session.beginDialog('webissue');
         })
         .matches('welcome', (session, args) => {
             var msg = {
@@ -172,9 +170,6 @@ bot.dialog('/',
         }
         )
 
-        .matches('webissue_login', (session, args) => {
-            session.beginDialog('webissue_login');
-        })
         .matches('feedback', (session, args) => {
             var msg = {
                 "type": "message",
@@ -236,8 +231,8 @@ bot.dialog('/',
             }
             session.send(msg);
 
-        })
-        .matches('root', (session, args) => {
+        })*/
+        /*.matches('root', (session, args) => {
             var msg = {
                 "type": "message",
                 "attachmentLayout": "carousel",
@@ -368,21 +363,17 @@ bot.dialog('/',
         })
         .onDefault((session) => {
             session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
-        })
-);
+        })*/
+//).triggerAction({matches: '/'});
+bot.dialog('usercontext', require('./user/usercontext')).triggerAction({matches: 'usercontext'});
+bot.dialog('policyquery', require('./policy/policyquery')).triggerAction({matches: 'policyquery'});
+bot.dialog('policyinfo', require('./policy/policyinfo')).triggerAction({matches: 'policyinfo'});
+bot.dialog('beneficiaryinfo', require('./policy/beneficiaryinfo')).triggerAction({matches: 'beneficiaryinfo'});
+bot.dialog('policychangehistory', require('./policy/policychangehistory')).triggerAction({matches: 'policychangehistory'});
 
-bot.dialog('webissue', require('./webissue_dialogs/webissue')
-).triggerAction({
-    matches: 'webissue'
-});
-
-bot.dialog('webissue_login', require('./webissue_dialogs/login')
-).triggerAction({
-    matches: 'webissue_login'
-});
-
-bot.dialog('maxretry', require('./commonDialog/maxretry')
-).triggerAction({matches: 'maxretry'});
+bot.dialog('webissue', require('./webissue_dialogs/webissue')).triggerAction({matches: 'webissue'});
+bot.dialog('webissue_login', require('./webissue_dialogs/login')).triggerAction({matches: 'webissue_login'});
+bot.dialog('maxretry', require('./commonDialog/maxretry')).triggerAction({matches: 'maxretry'});
 
 bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({matches: 'feedback'});
 bot.dialog('root', require('./commonDialog/root')).triggerAction({matches:'root'});
@@ -394,7 +385,7 @@ bot.dialog('thanks', [
     }
 ]).triggerAction({matches: 'thanks'});
 
-
+/*
 bot.dialog('/verifyssn', [
     function (session, args, next) {
         if (parseInt(session.userData.retry_ssn) == 0) {
@@ -922,23 +913,23 @@ bot.use({
             });
     }
 });
-var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
-                <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
-                <input type="button" onclick="hello(this)" value="Payment Query" id="Payment Query"><br>
-                <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
+*/
                 
+var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
+        <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
+        <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>
+        <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
 
 bot.on('conversationUpdate', function (activity) {
     // when user joins conversation, send instructions
     if (activity.membersAdded) {
         activity.membersAdded.forEach(function (identity) {
             if (identity.id === activity.address.bot.id) {
-                
                 var reply = new builder.Message()
-                    .address(activity.address)
-                    .text(instructions);
+                            .address(activity.address)
+                            .text(instructions);
                 bot.send(reply);
-                //bot.beginDialog(activity.address, '/');
+                //bot.beginDialog(activity.address, 'init');
             }
         });
     }

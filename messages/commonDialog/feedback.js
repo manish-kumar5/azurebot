@@ -12,7 +12,7 @@ module.exports = [
                     "content": {
                         //"text": "Welcome to Mercer Bot! What can i help you with?",
                         "title": "Feedback",
-                        "subtitle": session.userData.username + ", were the informations provided to you appropriate?",
+                        "subtitle": session.userData.username + ", were the informations provided to you appropriate? <br>",
                         "buttons": [
                             {
                                 "type": "postBack",
