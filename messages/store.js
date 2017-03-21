@@ -60,7 +60,7 @@ module.exports = {
             return _beneficiary;
     },
     searchPolicy: function (certnumber) {
-        return new Promise(function (resolve) {
+        //return new Promise(function (resolve) {
 
             var _policy;
             for (var i = 0, l = policydata.policies.length; i < l; i++){
@@ -70,14 +70,14 @@ module.exports = {
                     break;
                 }
             }
-
+            return _policy;
 
             // complete promise with a timer to simulate async response
-            setTimeout(() => resolve(_policy), 1000);
-        });
+            //setTimeout(() => resolve(_policy), 1000);
+        //});
     },
     searchBeneficiary: function (certnumber) {
-        return new Promise(function (resolve) {
+        //return new Promise(function (resolve) {
 
             var _beneficiary;
             for (var i = 0, l = beneficiarydata.beneficiaries.length; i < l; i++){
@@ -88,14 +88,14 @@ module.exports = {
                 }
             }
 
-
+            return _beneficiary;
             // complete promise with a timer to simulate async response
-            setTimeout(() => resolve(_beneficiary), 1000);
-        });
+            //setTimeout(() => resolve(_beneficiary), 1000);
+        //});
     },
 
     searchChangehistory: function (certnumber) {
-        return new Promise(function (resolve) {
+        //return new Promise(function (resolve) {
 
             var _changehistory;
             for (var i = 0, l = changehistorydata.changehistory.length; i < l; i++){
@@ -105,8 +105,9 @@ module.exports = {
                     break;
                 }
             }
+            return _changehistory;
             // complete promise with a timer to simulate async response
-            setTimeout(() => resolve(_changehistory), 1000);
-        });
+            //setTimeout(() => resolve(_changehistory), 1000);
+        //});
     }
 };

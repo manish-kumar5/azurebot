@@ -29,7 +29,7 @@ module.exports = [
                 }
             ]
         }
-        builder.Prompts.choice(session, msg, "Yes|No", {
+        builder.Prompts.choice(session, msg, ["Yes", "No"], {
             maxRetries: 3,
             retryPrompt: 'Not a valid option'
         });
@@ -64,7 +64,7 @@ module.exports = [
                     }
                 ]
             }
-            builder.Prompts.choice(session, msg, "Yes|No", {
+            builder.Prompts.choice(session, msg, ["Yes", "No"], {
                 maxRetries: 3,
                 retryPrompt: 'Not a valid option'
             });

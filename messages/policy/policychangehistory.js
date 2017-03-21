@@ -70,7 +70,7 @@ module.exports = [
 
     },
     function(session, results){
-        if(resluts.response){
+        if(results.response){
             var resp = results.response.entity;
             session.endDialog();
             if(resp == "Yes"){

@@ -45,11 +45,11 @@ module.exports = [
         if(results.response){
             session.endDialog();
             if(results.response.entity == "Policy Query"){
-                session.beginDialog('/');
+                session.beginDialog('policyquery');
             }else if(results.response.entity == "Website Issue"){
                 session.beginDialog('webissue');
             }else{
-                session.beginDialog('/');
+                session.beginDialog('policyquery');
             }
         }else{
             session.endDialog();
