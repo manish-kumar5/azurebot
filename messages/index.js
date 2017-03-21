@@ -7,95 +7,12 @@ var botbuilder_azure = require("botbuilder-azure");
 var restify = require('restify');
 var store = require('./store');
 var spellService = require('./spell-service');
-//var format = require("string-template");
-//var compile = require("string-template/compile");
 
 var thanks =
 `Thanks for contacting us <br>
 For any further help Please reach out to our 24x7 customer care @ <b>1800-3452-3452</b>
 Do visit again!! Bye & Take care..
 `;
-
-/*var policyTemplate = compile(
-    `<b> Policy details for certificate number {0} as follows: </b> 
-    <table border="0"> 
-        <tr> 
-            <td>Attributes </td><td>Value </td>
-        </tr>
-        <tr> 
-            <td> Policy Name:</td><td>{1}</td>
-        <tr>
-        <tr> 
-            <td> TPA:</td><td>{2}</td>
-        <tr>    
-        <tr> 
-            <td> Policy Duration:</td><td>{3}</td>
-        <tr>
-        <tr> 
-            <td> Valid Upto:</td><td>{4}</td>
-        <tr>
-        <tr> 
-            <td> Start Date:</td><td>{5}</td>
-        <tr>
-        <tr> 
-            <td> End Date:</td><td>{6}</td>
-        <tr>    
-        <tr> 
-            <td> Premium Amount:</td><td>{7}</td>
-        <tr> 
-        <tr> 
-            <td> Currency:</td><td>{8}</td>
-        <tr> 
-        <tr> 
-            <td> Commission Amount:</td><td>{9}</td>
-        <tr>
-        </table>
-`);
-
-var beneficiaryTemplate = compile(
-    `<b>Beneficiary details as follows:</b>
-<table border="0">
-    <tr> 
-        <td>Attributes </td><td>Value </td>
-    </tr>
-    <tr> 
-        <td> Beneficiary Name:</td><td>{0}</td>
-    <tr>
-    <tr> 
-        <td> Address:</td><td>{1}</td>
-    <tr>
-    <tr> 
-        <td> Date of Birth:</td><td>{2}</td>
-    <tr>
-    <tr> 
-        <td> Telephone:</td><td>{3}</td>
-    <tr>
-</table>
-`
-);
-
-var historyTemplate = compile(
-`
-<b>Policy change history details as follows:</b>
-<table border="0">
-    <tr> 
-        <td>Attributes </td><td>Value </td>
-    </tr>
-    <tr> 
-        <td> Information Updated:</td><td>{0}</td>
-    <tr>
-    <tr> 
-        <td> Previous Value:</td><td>{1}</td>
-    <tr>
-    <tr> 
-        <td> Updated Value:</td><td>{2}</td>
-    <tr>
-    <tr> 
-        <td> Updated Date:</td><td>{3}</td>
-    <tr>
-`
-);
-*/
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -116,6 +33,60 @@ const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/
 
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 bot.recognizer(recognizer);
+
+bot.dialog('usercontext', require('./user/usercontext')).triggerAction({matches: 'usercontext'});
+bot.dialog('policyquery', require('./policy/policyquery')).triggerAction({matches: 'policyquery'});
+bot.dialog('policyinfo', require('./policy/policyinfo')).triggerAction({matches: 'policyinfo'});
+bot.dialog('beneficiaryinfo', require('./policy/beneficiaryinfo')).triggerAction({matches: 'beneficiaryinfo'});
+bot.dialog('policychangehistory', require('./policy/policychangehistory')).triggerAction({matches: 'policychangehistory'});
+
+bot.dialog('webissue', require('./webissue_dialogs/webissue')).triggerAction({matches: 'webissue'});
+bot.dialog('webissue_login', require('./webissue_dialogs/login')).triggerAction({matches: 'webissue_login'});
+bot.dialog('maxretry', require('./commonDialog/maxretry')).triggerAction({matches: 'maxretry'});
+
+bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({matches: 'feedback'});
+bot.dialog('root', require('./commonDialog/root')).triggerAction({matches:'root'});
+bot.dialog('thanks', [
+    function(session, args, next){
+        var msg = thanks;
+        session.send(msg);
+        session.endDialog();
+    }
+]).triggerAction({matches: 'thanks'});
+
+                
+var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
+        <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
+        <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>
+        <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
+
+bot.on('conversationUpdate', function (activity) {
+    // when user joins conversation, send instructions
+    if (activity.membersAdded) {
+        activity.membersAdded.forEach(function (identity) {
+            if (identity.id === activity.address.bot.id) {
+                var reply = new builder.Message()
+                            .address(activity.address)
+                            .text(instructions);
+                bot.send(reply);
+                //bot.beginDialog(activity.address, 'init');
+            }
+        });
+    }
+});
+
+if (useEmulator) {
+    var restify = require('restify');
+    var server = restify.createServer();
+    server.listen(3978, function () {
+        console.log('test bot endpont at http://localhost:3978/api/messages');
+    });
+    server.post('/api/messages', connector.listen());
+} else {
+    module.exports = { default: connector.listen() }
+}
+('error', function (err) { console.error(err) })
+
 
 //bot.dialog('init', require('./commonDialog/init')).triggerAction({matches: 'init'});
 //bot.dialog('/', require('./commonDialog/init')).triggerAction({matches:'/'});
@@ -365,25 +336,7 @@ bot.recognizer(recognizer);
             session.send(`Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.`, session.message.text);
         })*/
 //).triggerAction({matches: '/'});
-bot.dialog('usercontext', require('./user/usercontext')).triggerAction({matches: 'usercontext'});
-bot.dialog('policyquery', require('./policy/policyquery')).triggerAction({matches: 'policyquery'});
-bot.dialog('policyinfo', require('./policy/policyinfo')).triggerAction({matches: 'policyinfo'});
-bot.dialog('beneficiaryinfo', require('./policy/beneficiaryinfo')).triggerAction({matches: 'beneficiaryinfo'});
-bot.dialog('policychangehistory', require('./policy/policychangehistory')).triggerAction({matches: 'policychangehistory'});
 
-bot.dialog('webissue', require('./webissue_dialogs/webissue')).triggerAction({matches: 'webissue'});
-bot.dialog('webissue_login', require('./webissue_dialogs/login')).triggerAction({matches: 'webissue_login'});
-bot.dialog('maxretry', require('./commonDialog/maxretry')).triggerAction({matches: 'maxretry'});
-
-bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({matches: 'feedback'});
-bot.dialog('root', require('./commonDialog/root')).triggerAction({matches:'root'});
-bot.dialog('thanks', [
-    function(session, args, next){
-        var msg = thanks;
-        session.send(msg);
-        session.endDialog();
-    }
-]).triggerAction({matches: 'thanks'});
 
 /*
 bot.dialog('/verifyssn', [
@@ -914,35 +867,3 @@ bot.use({
     }
 });
 */
-                
-var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
-        <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
-        <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>
-        <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
-
-bot.on('conversationUpdate', function (activity) {
-    // when user joins conversation, send instructions
-    if (activity.membersAdded) {
-        activity.membersAdded.forEach(function (identity) {
-            if (identity.id === activity.address.bot.id) {
-                var reply = new builder.Message()
-                            .address(activity.address)
-                            .text(instructions);
-                bot.send(reply);
-                //bot.beginDialog(activity.address, 'init');
-            }
-        });
-    }
-});
-
-if (useEmulator) {
-    var restify = require('restify');
-    var server = restify.createServer();
-    server.listen(3978, function () {
-        console.log('test bot endpont at http://localhost:3978/api/messages');
-    });
-    server.post('/api/messages', connector.listen());
-} else {
-    module.exports = { default: connector.listen() }
-}
-('error', function (err) { console.error(err) })

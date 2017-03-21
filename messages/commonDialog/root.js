@@ -17,7 +17,7 @@ module.exports = [
                         "buttons": [
                             {
                                 "type": "postBack",
-                                "title": "Policy Query",
+                                "title": "Policy",
                                 "value": "Policy Query"
                             },
                             {
@@ -27,7 +27,7 @@ module.exports = [
                             },
                             {
                                 "type": "postBack",
-                                "title": "Website Issue",
+                                "title": "Login Help",
                                 "value": "Website Issue"
                             }
                         ]
