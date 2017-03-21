@@ -58,7 +58,7 @@ bot.dialog('thanks', [
 var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
         <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
         <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>
-        <input type="button" onclick="hello(this)" value="Website Issue" id="Website Issue">`;
+        <input type="button" onclick="hello(this)" value="Login Help" id="Website Issue">`;
 
 bot.on('conversationUpdate', function (activity) {
     // when user joins conversation, send instructions
