@@ -17,7 +17,7 @@ module.exports = [
         if (validuserid) {
             var passreset_msg = "<b>" + session.userData.username + "</b>,  The user id provided by you is correct as per our records. It seems the problem is with password. Can i reset your password?<br>";
             passreset_msg += '<input type="button" onclick="hello(this)" value="Yes" id="Yes">&nbsp;<input type="button" onclick="hello(this)" value="No" id="No">';
-            builder.Prompts.choice(session, passreset_msg, "Yes|No",
+            builder.Prompts.choice(session, passreset_msg, ["Yes", "No"],
                 {
                     maxRetries: 3,
                     retryPrompt: 'Not a valid option'
@@ -66,7 +66,7 @@ module.exports = [
                         }
                     ]
                 }
-                builder.Prompts.choice(session, msg, "Yes|No",
+                builder.Prompts.choice(session, msg, ["Yes","No"],
                 {
                     maxRetries: 3,
                     retryPrompt: 'Not a valid option'
@@ -75,7 +75,7 @@ module.exports = [
                 var msg = "<b>" + session.userData.username + "</b>, Your password has been reset to <b>1234</b>. Please click below login link to try again. Also please reset your password after successful login<br> <a href='#'>Login</a><br> ";
                 msg += "Do you have any further query? <br>";
                 msg += '<input type="button" onclick="hello(this)" value="Yes" id="Yes">&nbsp;<input type="button" onclick="hello(this)" value="No" id="No">';
-                builder.Prompts.choice(session, msg, "Yes|No",
+                builder.Prompts.choice(session, msg, ["Yes", "No"],
                 {
                     maxRetries: 3,
                     retryPrompt: 'Not a valid option'

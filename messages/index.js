@@ -10,13 +10,13 @@ var spellService = require('./spell-service');
 //var format = require("string-template");
 //var compile = require("string-template/compile");
 
-/*var thanks =
+var thanks =
 `Thanks for contacting us <br>
 For any further help Please reach out to our 24x7 customer care @ <b>1800-3452-3452</b>
 Do visit again!! Bye & Take care..
 `;
 
-var policyTemplate = compile(
+/*var policyTemplate = compile(
     `<b> Policy details for certificate number {0} as follows: </b> 
     <table border="0"> 
         <tr> 
