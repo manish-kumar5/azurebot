@@ -136,22 +136,22 @@ module.exports = [
                     });
             }
         } else {
-            session.endDialog();
+            //session.endDialog();
             session.beginDialog('maxretry');
         }
     },
     function (session, results) {
         if (results.response) {
-            if (results.response.entity === "No") {
-                session.endDialog();
+            if (results.response.entity == "No") {
+                //session.endDialog();
                 session.beginDialog('feedback');
             } else {
-                session.endDialog();
+                //session.endDialog();
                 session.beginDialog('root');
             }
 
         } else {
-            session.endDialog();
+            //session.endDialog();
             session.beginDialog('maxretry');
         }
     }
