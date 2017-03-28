@@ -31,8 +31,6 @@ const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/
 
 //'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/924eee0c-8ca1-49a4-b652-9ac5f7d09f9e?subscription-key=7c76b26278854cb1858bb06c58484982&verbose=true';
 
-
-
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 bot.recognizer(recognizer);
 
@@ -47,7 +45,10 @@ bot.dialog('webissue_login', require('./webissue_dialogs/login')).triggerAction(
 bot.dialog('maxretry', require('./commonDialog/maxretry')).triggerAction({matches: 'maxretry'});
 
 bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({matches: 'feedback'});
-bot.dialog('root', require('./commonDialog/root')).triggerAction({matches:'root'});
+bot.dialog('root', require('./commonDialog/root')).triggerAction({ matches: 'root' });
+
+bot.dialog('payment', require('./commonDialog/authentication')).triggerAction({ matches: 'payment' });
+
 bot.dialog('thanks', [
     function(session, args, next){
         var msg = thanks;
@@ -56,7 +57,6 @@ bot.dialog('thanks', [
     }
 ]).triggerAction({matches: 'thanks'});
 
-                
 var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
         <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
         <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>

@@ -11,6 +11,6 @@ module.exports = [
         session.userData.dob = usercontext.dob;
         session.userData.validation = true;
 
-        session.send("UserContext Successful");
+        session.send({ valid: true });
     }
 ];
