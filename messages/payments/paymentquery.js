@@ -22,7 +22,7 @@ module.exports = [
             msg += `<div class ="form-group form-group-sm"><label class="col-sm-2 control-label" for="tele">Telephone: </label><input type="text" class ="form-control" id="tele"></div>`;
             msg += `<div class ="form-group form-group-sm"><label class="col-sm-2 control-label" for="ssn">SSN (Last 4 digits): </label><input type="text" class ="form-control" id="ssn" maxlength="4"></div>`;
             msg += `<button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitUserInput();">Submit</button>`;
-            msg += `<button type="button" class="btn btn-primary" id="btnCancel" onclick="cancelUserInput();>Cancel</button>`;
+            msg += `<button type="button" class="btn btn-primary" id="btnCancel" onclick="cancelUserInput();">Cancel</button>`;
             msg += `<div id="lblmsg"></div>`;
 
             session.send(msg);
