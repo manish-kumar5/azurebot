@@ -11,6 +11,14 @@ module.exports = [
         session.userData.dob = usercontext.dob;
         session.userData.validation = true;
 
-        session.send({ valid: true });
+        var returnMsg = '<div>Thanks for confirming the details. Verification has been completed succesfully. How may I assist you further.</div>';
+
+        /// If user came from a specific workflow redirect post verification.
+        if (session.userData.userStep) {
+            session.beginDialog(session.userData.userStep);
+        }
+        else {
+            builder.Prompts.text(session, returnMsg);
+        }
     }
 ];
