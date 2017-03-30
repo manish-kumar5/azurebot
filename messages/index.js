@@ -31,27 +31,28 @@ var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 bot.recognizer(recognizer);
 
 bot.dialog('/', [
-    function(session, args, next){
+    function (session, args, next) {
         session.send("Sorry!! I didn't understand. Please try again.");
     }
 ]);
-bot.dialog('usercontext', require('./user/usercontext')).triggerAction({matches: 'usercontext'});
-bot.dialog('policyquery', require('./policy/policyquery')).triggerAction({matches: 'policyquery'});
-bot.dialog('policyinfo', require('./policy/policyinfo')).triggerAction({matches: 'policyinfo'});
-bot.dialog('beneficiaryinfo', require('./policy/beneficiaryinfo')).triggerAction({matches: 'beneficiaryinfo'});
-bot.dialog('policychangehistory', require('./policy/policychangehistory')).triggerAction({matches: 'policychangehistory'});
+bot.dialog('usercontext', require('./user/usercontext')).triggerAction({ matches: 'usercontext' });
+bot.dialog('policyquery', require('./policy/policyquery')).triggerAction({ matches: 'policyquery' });
+bot.dialog('policyinfo', require('./policy/policyinfo')).triggerAction({ matches: 'policyinfo' });
+bot.dialog('beneficiaryinfo', require('./policy/beneficiaryinfo')).triggerAction({ matches: 'beneficiaryinfo' });
+bot.dialog('policychangehistory', require('./policy/policychangehistory')).triggerAction({ matches: 'policychangehistory' });
 
-bot.dialog('webissue', require('./webissue_dialogs/webissue')).triggerAction({matches: 'webissue'});
-bot.dialog('webissue_login', require('./webissue_dialogs/login')).triggerAction({matches: 'webissue_login'});
-bot.dialog('maxretry', require('./commonDialog/maxretry')).triggerAction({matches: 'maxretry'});
+bot.dialog('webissue', require('./webissue_dialogs/webissue')).triggerAction({ matches: 'webissue' });
+bot.dialog('webissue_login', require('./webissue_dialogs/login')).triggerAction({ matches: 'webissue_login' });
+bot.dialog('maxretry', require('./commonDialog/maxretry')).triggerAction({ matches: 'maxretry' });
 
-bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({matches: 'feedback'});
+bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({ matches: 'feedback' });
 bot.dialog('root', require('./commonDialog/root')).triggerAction({ matches: 'root' });
 
-bot.dialog('payment', require('./commonDialog/authentication')).triggerAction({ matches: 'payment' });
+bot.dialog('payment', require('./payments/paymentquery')).triggerAction({ matches: 'payment' });
+bot.dialog('authentication', require('./commonDialog/authentication')).triggerAction({ matches: 'authentication' });
 
 
-bot.dialog('thanks', require('./commonDialog/thanks')).triggerAction({matches: 'thanks'});
+bot.dialog('thanks', require('./commonDialog/thanks')).triggerAction({ matches: 'thanks' });
 
 
 var instructions = `<b> <p>I am BEN, your AI support specialist. What can I help you with today?</p></b> <br> I can answer questions related to your policy,

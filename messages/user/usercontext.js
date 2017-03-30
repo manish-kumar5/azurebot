@@ -13,6 +13,12 @@ module.exports = [
 
         var returnMsg = '<div>Thanks for confirming the details. Verification has been completed succesfully. How may I assist you further.</div>';
 
-        builder.Prompts.text(session, returnMsg);
+        /// If user came from a specific workflow redirect post verification.
+        if (session.userData.userStep) {
+            session.beginDialog(session.userData.userStep);
+        }
+        else {
+            builder.Prompts.text(session, returnMsg);
+        }
     }
 ];

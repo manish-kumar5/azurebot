@@ -2,18 +2,7 @@ var builder = require('botbuilder');
 
 module.exports = [
     function (session, args, next) {
-        var msg = '';
-        var isAuthenticated = false;
-
-        if (session.userdata && session.userdata.username) {
-            isAuthenticated = true;
-
-            msg = 'Hi  ' + session.userdata.username + '!!. Thank you for contacting Insurance Operations. How may I help you?'
-
-            session.send(msg);
-        }
-        else {
-            var msg = `
+        var msg = `
             <form role="form">
                 <div class="container" id="authDetails">
                     <div class="form-group">
@@ -52,19 +41,18 @@ module.exports = [
                 </div>
             </form>`;
 
-            /*
-                        var containerHtml = '<div class="row msg_container base_receive">';
-                        containerHtml += '            <div class="col-md-2 col-xs-2 avatar">';
-                        containerHtml += '                    <img style="height:40px;width:40px;" src="../images/ben.png" class=" img-responsive "/>';
-                        containerHtml += '  </div> <div class="col-md-10 col-xs-10"> <div class="messages msg_receive"> <p>';
-                        containerHtml += msg;
-                        containerHtml += '</p><time datetime="2009-11-13T20:00">BEN at ';
-                        containerHtml += new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
-                        containerHtml += '</time> </div> </div></div>';
-            */
+        /*
+                    var containerHtml = '<div class="row msg_container base_receive">';
+                    containerHtml += '            <div class="col-md-2 col-xs-2 avatar">';
+                    containerHtml += '                    <img style="height:40px;width:40px;" src="../images/ben.png" class=" img-responsive "/>';
+                    containerHtml += '  </div> <div class="col-md-10 col-xs-10"> <div class="messages msg_receive"> <p>';
+                    containerHtml += msg;
+                    containerHtml += '</p><time datetime="2009-11-13T20:00">BEN at ';
+                    containerHtml += new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
+                    containerHtml += '</time> </div> </div></div>';
+        */
 
-            session.send(msg);
-        }
+        session.send(msg);
     }
 ];
 
