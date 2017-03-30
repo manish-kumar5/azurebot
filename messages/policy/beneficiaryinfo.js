@@ -34,8 +34,8 @@ module.exports = [
         else {
             var beninfo = "Sorry!! No beneficiary information found";
         }
-
-        var msg = {
+        builder.Prompts.text(session, beninfo + `<br> Do you have any other questions regarding the policy?`);
+        /*var msg = {
             "type": "message",
             "attachmentLayout": "carousel",
             "text": "",
@@ -67,23 +67,26 @@ module.exports = [
                 maxRetries: 3,
                 retryPrompt: 'Not a valid option'
             });
-
+        */
     },
     function(session, results){
         if(results.response){
-            var resp = results.response.entity;
-            session.endDialog();
-            if(resp == "Yes"){
+            var resp = results.response.toLowerCase();
+            //session.endDialog();
+            if(resp == "yes"){
                 session.beginDialog('policyquery');
             }
+            if(resp == "no"){
+                session.beginDialog('thanks');
+            }
             else {
-                session.beginDialog('feedback');
+                session.beginDialog('/');
             }
         }
-        else{
+        /*else{
             session.endDialog();
             session.beginDialog('maxretry');
-        }
+        }*/
     }
 
 

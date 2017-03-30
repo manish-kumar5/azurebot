@@ -48,8 +48,9 @@ module.exports = [
         else {
             var policy_info = "Sorry!! No policy information found";
         }
+        builder.Prompts.text(session, policy_info + `<br> Do you have any other questions regarding the policy?`);
 
-        var msg = {
+        /*var msg = {
             "type": "message",
             "attachmentLayout": "carousel",
             "text": "",
@@ -59,7 +60,7 @@ module.exports = [
                     "content": {
                         //"text": "Welcome to Mercer Bot! What can i help you with?",
                         "title": "Policy Information",
-                        "subtitle": policy_info + `<br> Do you have further queries w.r.t. your policy`,
+                        "subtitle": policy_info + `<br> Do you have any other questions regarding the policy?`,
                         "buttons": [
                             {
                                 "type": "postBack",
@@ -81,22 +82,21 @@ module.exports = [
                 maxRetries: 3,
                 retryPrompt: 'Not a valid option'
             });
-
+        */
     },
     function(session, results){
         if(results.response){
-            var resp = results.response.entity;
-            session.endDialog();
-            if(resp == "Yes"){
+            var resp = results.response.toLowerCase();
+            //session.endDialog();
+            if(resp === "yes"){
                 session.beginDialog('policyquery');
             }
-            else {
-                session.beginDialog('feedback');
+            if(resp == "no"){
+                session.beginDialog('thanks');
             }
-        }
-        else{
-            session.endDialog();
-            session.beginDialog('maxretry');
+            else {
+                session.beginDialog('/');
+            }
         }
     }
 

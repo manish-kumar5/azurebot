@@ -17,7 +17,7 @@ module.exports = [
                     "content": {
                         //"text": "Welcome to Mercer Bot! What can i help you with?",
                         "title": "Policy Query",
-                        "subtitle": session.userData.username + ", I can help you with below options w.r.t. your Policy. Please select the option on which you need help or type your question to the input box provided below",
+                        "subtitle": session.userData.username + ", I will be happy to help you with your policy question. What would you like to know? (or you can select from the options below):",
                         "buttons": [
                             {
                                 "type": "postBack",

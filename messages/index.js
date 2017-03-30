@@ -8,15 +8,11 @@ var restify = require('restify');
 var store = require('./store');
 var spellService = require('./spell-service');
 
-var thanks =
-`Thanks for contacting us <br>
-For any further help Please reach out to our 24x7 customer care @ <b>1800-3452-3452</b>
-Do visit again!! Bye & Take care..
-`;
+
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -34,6 +30,11 @@ const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 bot.recognizer(recognizer);
 
+bot.dialog('/', [
+    function(session, args, next){
+        session.send("Sorry!! I didn't understand. Please try again.");
+    }
+]);
 bot.dialog('usercontext', require('./user/usercontext')).triggerAction({matches: 'usercontext'});
 bot.dialog('policyquery', require('./policy/policyquery')).triggerAction({matches: 'policyquery'});
 bot.dialog('policyinfo', require('./policy/policyinfo')).triggerAction({matches: 'policyinfo'});
@@ -49,15 +50,12 @@ bot.dialog('root', require('./commonDialog/root')).triggerAction({ matches: 'roo
 
 bot.dialog('payment', require('./commonDialog/authentication')).triggerAction({ matches: 'payment' });
 
-bot.dialog('thanks', [
-    function(session, args, next){
-        var msg = thanks;
-        session.send(msg);
-        session.endDialog();
-    }
-]).triggerAction({matches: 'thanks'});
 
-var instructions = `<b> <p>I am BEN, your AI support representative. What can I help you with today?</p></b> <br> Note: You can choose from below options or type your question in the input box<br>
+bot.dialog('thanks', require('./commonDialog/thanks')).triggerAction({matches: 'thanks'});
+
+
+var instructions = `<b> <p>I am BEN, your AI support specialist. What can I help you with today?</p></b> <br> I can answer questions related to your policy,
+ help you make a payment, or assist with login. To make things easier you can also choose from the options below<br>
         <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
         <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>
         <input type="button" onclick="hello(this)" value="Login Help" id="Website Issue">`;
