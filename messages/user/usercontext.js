@@ -11,6 +11,8 @@ module.exports = [
         session.userData.dob = usercontext.dob;
         session.userData.validation = true;
 
-        session.send({ valid: true });
+        var returnMsg = '<div>Thanks for confirming the details. Verification has been completed succesfully. How may I assist you further.</div>';
+
+        session.send(returnMsg);
     }
 ];
