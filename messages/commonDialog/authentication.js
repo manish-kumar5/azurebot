@@ -22,7 +22,7 @@ module.exports = [
 
                     <div class="form-group">
                         <label for="uid">User Name: </label>
-                        <input type="text" class="form-control" id="uid" required>
+                        <input type="text" class="form-control col-sm-4" id="uid" required>
                     </div>
 
                     <div class="form-group">
@@ -45,7 +45,7 @@ module.exports = [
                         <input type="text" class="form-control" id="ssn" maxlength="4" required>
                     </div>
 
-                    <input type="submit" class="btn btn-primary btn-sm" id="btnSubmit" onclick="submitUserInput();" title="Submit" />&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" id="btnSubmit" onclick="submitUserInput();">Submit</button>&nbsp; &nbsp;
                     <button type="button" class="btn btn-primary btn-sm" id="btnClear" onclick="clearUserInput();">Clear</button>
 
                     <div id="lblmsg"></div>
