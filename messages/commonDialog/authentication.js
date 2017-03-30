@@ -14,8 +14,8 @@ module.exports = [
         }
         else {
             var msg = `
-            <form role="form" data-toggle="validator">
-                <div class="container">
+            <form role="form">
+                <div class="container" id="authDetails">
                     <div class="form-group">
                         <label class="control-label">I will be happy to assist. First, for verification, may I please have your details<br></label>
                     </div>
@@ -52,17 +52,18 @@ module.exports = [
                 </div>
             </form>`;
 
-            var containerHtml = '<div class="row msg_container base_receive">';
-            containerHtml += '            <div class="col-md-2 col-xs-2 avatar">';
-            containerHtml += '                    <img style="height:40px;width:40px;" src="../images/ben.png" class=" img-responsive "/>';
-            containerHtml += '  </div> <div class="col-md-10 col-xs-10"> <div class="messages msg_receive"> <p>';
-            containerHtml += msg;
-            containerHtml += '</p><time datetime="2009-11-13T20:00">BEN at ';
-            containerHtml += new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
-            containerHtml += '</time> </div> </div></div>';
+            /*
+                        var containerHtml = '<div class="row msg_container base_receive">';
+                        containerHtml += '            <div class="col-md-2 col-xs-2 avatar">';
+                        containerHtml += '                    <img style="height:40px;width:40px;" src="../images/ben.png" class=" img-responsive "/>';
+                        containerHtml += '  </div> <div class="col-md-10 col-xs-10"> <div class="messages msg_receive"> <p>';
+                        containerHtml += msg;
+                        containerHtml += '</p><time datetime="2009-11-13T20:00">BEN at ';
+                        containerHtml += new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
+                        containerHtml += '</time> </div> </div></div>';
+            */
 
-
-            session.send(containerHtml);
+            session.send(msg);
         }
     }
 ];
