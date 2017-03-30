@@ -13,6 +13,6 @@ module.exports = [
 
         var returnMsg = '<div>Thanks for confirming the details. Verification has been completed succesfully. How may I assist you further.</div>';
 
-        session.send(returnMsg);
+        builder.Prompts.text(session, returnMsg);
     }
 ];
