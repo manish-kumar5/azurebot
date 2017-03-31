@@ -9,27 +9,27 @@ module.exports = [
                         <label class="control-label">I will be happy to assist. First, for verification, may I please have your details<br></label>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-xs-4 col-lg-1">
                         <label for="uid">User Name: </label>
-                        <input type="text" class="form-control col-sm-4" id="uid" required>
+                        <input type="text" class="form-control" id="uid" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-xs-4 col-lg-1">
                         <label for="certno">Certificate #: </label>
                         <input type="text" class="form-control" id="certno" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-xs-4 col-lg-1">
                         <label for="dob">Date of Birth (MM-DD-YYYY): </label>
                         <input type="text" class="form-control" id="dob" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-xs-4 col-lg-1">
                         <label for="tele">Telephone: </label>
                         <input type="text" class="form-control" id="tele" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-xs-4 col-lg-1">
                         <label for="ssn">SSN (Last 4 digits): </label>
                         <input type="text" class="form-control" id="ssn" maxlength="4" required>
                     </div>
