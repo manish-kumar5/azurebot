@@ -3,12 +3,13 @@ var store = require('../store');
 
 module.exports = [
     function (session, args, next) {
-        var login_msg = "<b>" + session.userData.username + "</b>,  I can help you with login. Please type your login ID";
+        var login_msg = "I can help you with login. Please type your login ID";
         var retry_msg = "Oops!! The userid provided by you does not match our records. Please check and provide again.";
-        if (parseInt(session.userData.retry_userid) == 0) {
-            builder.Prompts.text(session, login_msg);
-        } else {
+        if (parseInt(session.userData.retry_userid) > 0) {
             builder.Prompts.text(session, retry_msg);
+            
+        } else {
+            builder.Prompts.text(session, login_msg);
         }
     },
     function (session, results) {
