@@ -49,11 +49,18 @@ bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({ match
 bot.dialog('root', require('./commonDialog/root')).triggerAction({ matches: 'root' });
 
 bot.dialog('payment', require('./payments/paymentquery')).triggerAction({ matches: 'payment' });
+
+bot.dialog('certificateinformation', require('./payments/certificatequery')).triggerAction({ matches: 'certificateinformation' });
+
+bot.dialog('paymentoptionsquery', require('./payments/paymentoptionsquery')).triggerAction({ matches: 'paymentoptionsquery' });
+
+bot.dialog('accountinfo', require('./payments/accountinfo')).triggerAction({ matches: 'accountinfo' });
+
+bot.dialog('paypremium', require('./payments/paypremium')).triggerAction({ matches: 'paypremium' });
+
 bot.dialog('authentication', require('./commonDialog/authentication')).triggerAction({ matches: 'authentication' });
 
-
 bot.dialog('thanks', require('./commonDialog/thanks')).triggerAction({ matches: 'thanks' });
-
 
 var instructions = `<b> <p>I am BEN, your AI support specialist. What can I help you with today?</p></b> <br> I can answer questions related to your policy,
  help you make a payment, or assist with login. To make things easier you can also choose from the options below<br>
