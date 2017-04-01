@@ -16,7 +16,7 @@ module.exports = [
         var loginid = results.response;
         var validuserid = store.validateUserid(loginid, session.userData.username);
         if (validuserid) {
-            var passreset_msg = "I was able to confirm your login ID. If you’re having trouble logging in I can email you the instructions on how to set a new password. Would you like me to do that?';
+            var passreset_msg = 'I was able to confirm your login ID. If you’re having trouble logging in I can email you the instructions on how to set a new password. Would you like me to do that?';
             //passreset_msg += '<input type="button" onclick="hello(this)" value="Yes" id="Yes"><input type="button" onclick="hello(this)" value="No" id="No">';
             var msg = {
                 "type": "message",
