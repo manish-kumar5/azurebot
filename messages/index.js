@@ -61,7 +61,7 @@ var instructions = `<b> <p>I am BEN, your AI support specialist. What can I help
  help you make a payment, or assist with login. To make things easier you can also choose from the options below<br>
         <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
         <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>
-        <input type="button" onclick="hello(this)" value="Login Help" id="Login Issue">`;
+        <input type="button" onclick="hello(this)" value="Login Help" id="Invalid Login">`;
 
 bot.on('conversationUpdate', function (activity) {
     // when user joins conversation, send instructions
