@@ -12,7 +12,7 @@ var spellService = require('./spell-service');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -54,12 +54,14 @@ bot.dialog('authentication', require('./commonDialog/authentication')).triggerAc
 
 bot.dialog('thanks', require('./commonDialog/thanks')).triggerAction({ matches: 'thanks' });
 
+// Validators
+bot.library(require('./validators').createLibrary());
 
 var instructions = `<b> <p>I am BEN, your AI support specialist. What can I help you with today?</p></b> <br> I can answer questions related to your policy,
  help you make a payment, or assist with login. To make things easier you can also choose from the options below<br>
         <input type="button" onclick="hello(this)" value="Policy" id="Policy Query"><br>
         <input type="button" onclick="hello(this)" value="Payment" id="Payment"><br>
-        <input type="button" onclick="hello(this)" value="Login Help" id="Website Issue">`;
+        <input type="button" onclick="hello(this)" value="Login Help" id="Login Issue">`;
 
 bot.on('conversationUpdate', function (activity) {
     // when user joins conversation, send instructions
