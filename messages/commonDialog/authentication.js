@@ -74,6 +74,7 @@ module.exports = [
         */
 
         session.send(msg);
+        session.beginDialog('/');
     }
 ];
 

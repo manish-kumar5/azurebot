@@ -49,8 +49,16 @@ bot.dialog('feedback', require('./commonDialog/feedback')).triggerAction({ match
 bot.dialog('root', require('./commonDialog/root')).triggerAction({ matches: 'root' });
 
 bot.dialog('payment', require('./payments/paymentquery')).triggerAction({ matches: 'payment' });
-bot.dialog('authentication', require('./commonDialog/authentication')).triggerAction({ matches: 'authentication' });
 
+bot.dialog('certificateinformation', require('./payments/certificatequery')).triggerAction({ matches: 'certificateinformation' });
+
+bot.dialog('paymentoptionsquery', require('./payments/paymentoptionsquery')).triggerAction({ matches: 'paymentoptionsquery' });
+
+bot.dialog('accountinfo', require('./payments/accountinfo')).triggerAction({ matches: 'accountinfo' });
+
+bot.dialog('paypremium', require('./payments/paypremium')).triggerAction({ matches: 'paypremium' });
+
+bot.dialog('authentication', require('./commonDialog/authentication')).triggerAction({ matches: 'authentication' });
 
 bot.dialog('thanks', require('./commonDialog/thanks')).triggerAction({ matches: 'thanks' });
 
