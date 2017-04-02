@@ -27,14 +27,19 @@ var beneficiaryTemplate = compile(
 
 module.exports = [
     function (session, args, next) {
-        var beneficiary = store.searchBeneficiary(session.userData.certno);
-        if (beneficiary) {
-             var beninfo = beneficiaryTemplate(beneficiary.name, beneficiary.address, beneficiary.dob, beneficiary.phone);
+        if (session.userData && session.userData.username) {
+            var beneficiary = store.searchBeneficiary(session.userData.certno);
+            if (beneficiary) {
+                var beninfo = beneficiaryTemplate(beneficiary.name, beneficiary.address, beneficiary.dob, beneficiary.phone);
+            }
+            else {
+                var beninfo = "Sorry!! No beneficiary information found";
+            }
+            builder.Prompts.text(session, beninfo + `<br> Do you have any other questions regarding the policy?`);
+        }else{
+            session.userData.userStep = 'beneficiaryinfo';
+            session.beginDialog('authentication');
         }
-        else {
-            var beninfo = "Sorry!! No beneficiary information found";
-        }
-        builder.Prompts.text(session, beninfo + `<br> Do you have any other questions regarding the policy?`);
         /*var msg = {
             "type": "message",
             "attachmentLayout": "carousel",

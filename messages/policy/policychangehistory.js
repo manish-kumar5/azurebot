@@ -27,14 +27,19 @@ var historyTemplate = compile(
 
 module.exports = [
     function (session, args, next) {
-        var policy = store.searchChangehistory(session.userData.certno);
-        if (policy) {
-            var msg_history = historyTemplate(history.infoupdated, history.previousvalue, history.updatedvalue, history.updatedate);
+        if (session.userData && session.userData.username) {
+            var policy = store.searchChangehistory(session.userData.certno);
+            if (policy) {
+                var msg_history = historyTemplate(history.infoupdated, history.previousvalue, history.updatedvalue, history.updatedate);
+            }
+            else {
+                var msg_history = "Sorry!! No policy information found";
+            }
+            builder.Prompts.text(session, msg_history + `<br> Do you have any other questions regarding the policy?`);
+        }else{
+            session.userData.userStep = 'policychangehistory';
+            session.beginDialog('authentication');
         }
-        else {
-            var msg_history = "Sorry!! No policy information found";
-        }
-        builder.Prompts.text(session, msg_history + `<br> Do you have any other questions regarding the policy?`);
         /*var msg = {
             "type": "message",
             "attachmentLayout": "carousel",

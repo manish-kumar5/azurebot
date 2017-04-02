@@ -55,6 +55,7 @@ module.exports = [
                 var msg = thanks;
                 session.send(msg);
                 session.endDialog();
+                session.beginDialog('/');
         }
     }
 ];

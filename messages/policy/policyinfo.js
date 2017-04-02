@@ -41,15 +41,19 @@ var policyTemplate = compile(
 
 module.exports = [
     function (session, args, next) {
-        var policy = store.searchPolicy(session.userData.certno);
-        if (policy) {
-            var policy_info = policyTemplate(session.userData.certno, policy.policyname, policy.tpa, policy.policyduration, policy.validupto, policy.startdate, policy.enddate, policy.premium, policy.currency, policy.commission);
-        }
-        else {
-            var policy_info = "Sorry!! No policy information found";
-        }
-        builder.Prompts.text(session, policy_info + `<br> Do you have any other questions regarding the policy?`);
-
+         if (session.userData && session.userData.username) {
+            var policy = store.searchPolicy(session.userData.certno);
+            if (policy) {
+                var policy_info = policyTemplate(session.userData.certno, policy.policyname, policy.tpa, policy.policyduration, policy.validupto, policy.startdate, policy.enddate, policy.premium, policy.currency, policy.commission);
+            }
+            else {
+                var policy_info = "Sorry!! No policy information found";
+            }
+            builder.Prompts.text(session, policy_info + `<br> Do you have any other questions regarding the policy?`);
+         }else{
+            session.userData.userStep = 'policyinfo';
+            session.beginDialog('authentication');
+         }
         /*var msg = {
             "type": "message",
             "attachmentLayout": "carousel",
