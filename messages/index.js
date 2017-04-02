@@ -12,7 +12,7 @@ var spellService = require('./spell-service');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -32,7 +32,7 @@ bot.recognizer(recognizer);
 
 bot.dialog('/', [
     function (session, args, next) {
-        session.send("Sorry!! I didn't understand. Please try again.");
+        builder.Prompts.text(session, "Sorry!! I didn't understand. Please try again.");
     }
 ]);
 bot.dialog('usercontext', require('./user/usercontext')).triggerAction({ matches: 'usercontext' });

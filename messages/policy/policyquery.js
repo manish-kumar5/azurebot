@@ -3,7 +3,8 @@ var builder = require('botbuilder');
 module.exports = [
     function (session, args, next) {
         if (session.userData && session.userData.username) {
-            var DialogLabels = {
+            builder.Prompts.text(session, session.userData.username + ", I will be happy to help you with your policy question. What would you like to know? (or you can select from the options below):");
+            /*var DialogLabels = {
                 Policy_Information: 'Policy Information',
                 Beneficiary_Information: 'Beneficiary Information',
                 Change_History: 'Change History'
@@ -46,7 +47,7 @@ module.exports = [
                 {
                     maxRetries: 3,
                     retryPrompt: 'Not a valid option'
-            });
+            });*/
         }else{
             session.userData.userStep = 'policyquery';
             session.beginDialog('authentication');
@@ -54,14 +55,14 @@ module.exports = [
     },
     function(session, results){
         if(results.response){
-            var resp = results.response.entity;
+            var resp = results.response;
             session.endDialog();
             if(resp == "Policy Information"){
                 session.beginDialog('policyinfo');
             }
             else if(resp == "Beneficiary Information"){
                 session.beginDialog('beneficiaryinfo');
-            }else {
+            }else if(resp == "Change History") {
                 session.beginDialog('policychangehistory');
             }
         }

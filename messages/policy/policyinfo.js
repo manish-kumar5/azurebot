@@ -98,9 +98,9 @@ module.exports = [
             if(resp == "no"){
                 session.beginDialog('thanks');
             }
-            else {
-                session.beginDialog('/');
-            }
+            //else {
+            //    session.beginDialog('/');
+           // }
         }
     }
 

@@ -115,12 +115,21 @@ module.exports = [
         if (results.response) {
             session.userData.email = results.response;
             builder.Prompts.text(session, 'I have sent you instructions on how to set your password to ' + session.userData.email + '. Is there anything else I can help you with?');
-            session.beginDialog('/');
+            //session.beginDialog('/');
         } else {
             //session.endDialog();
             session.beginDialog('maxretry');
         }
+    },
+    function(session, results) {
+        if(results.response){
+            var resp = results.response.toLowerCase();
+            if(resp == "no"){
+                session.beginDialog('thanks');
+            }
+        }
     }
+
 ];
 
 //Helpers

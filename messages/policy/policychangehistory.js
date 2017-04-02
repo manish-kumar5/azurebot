@@ -33,7 +33,7 @@ module.exports = [
                 var msg_history = historyTemplate(history.infoupdated, history.previousvalue, history.updatedvalue, history.updatedate);
             }
             else {
-                var msg_history = "Sorry!! No policy information found";
+                var msg_history = "Sorry!! No policy change history found";
             }
             builder.Prompts.text(session, msg_history + `<br> Do you have any other questions regarding the policy?`);
         }else{
@@ -84,9 +84,9 @@ module.exports = [
             if(resp == "no"){
                 session.beginDialog('thanks');
             }
-            else {
-                session.beginDialog('/');
-            }
+            //else {
+            //    session.beginDialog('/');
+            //}
         }
         /*else{
             session.endDialog();
