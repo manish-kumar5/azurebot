@@ -42,7 +42,7 @@ module.exports = [
                     <div class="form-group">
                         <div class="col-sm-12">
                             <!--<label for="ssn">SSN (Last 4 digits): </label>-->
-                            <input type="text" class="form-control input-sm change-width" id="ssn" maxlength="4" placeholder="SSN" required>
+                            <input type="text" class="form-control input-sm change-width" id="ssn" maxlength="4" placeholder="SSN (Last 4 digits)" required>
                         </div>
                     </div>
 
