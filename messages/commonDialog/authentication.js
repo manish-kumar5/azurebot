@@ -13,8 +13,8 @@ module.exports = [
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label for="uid">User Name: </label>
-                            <input type="text" class="form-control input-sm" id="uid" required>
+                            <!--<label for="uid">User Name: </label>-->
+                            <input type="text" class="form-control input-sm" id="uid" required placeholder="User Name">
                         </div>
                     </div>
 
