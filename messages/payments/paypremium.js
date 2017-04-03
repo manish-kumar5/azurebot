@@ -3,10 +3,10 @@ var store = require('../store');
 
 module.exports = [
     function (session, args, next) {
-        session.send('I am able to accept a one time payment with a Visa or MasterCard.');
+        //session.send('I am able to accept a one time payment with a Visa or MasterCard.');
 
         if (!session.dialogData.cardnumber) { // && session.dialogData.card.number
-            builder.Prompts.text(session, 'Please provide your card number');
+            builder.Prompts.text(session, 'I am able to accept a one time payment with a Visa or MasterCard. <br> <b> Please provide your card number</b>');
         }
     },
     function (session, results) {
