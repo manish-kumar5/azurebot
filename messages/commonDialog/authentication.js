@@ -14,35 +14,35 @@ module.exports = [
                     <div class="form-group">
                         <div class="col-sm-12">
                             <!--<label for="uid">User Name: </label>-->
-                            <input type="text" class="form-control input-sm" id="uid" required placeholder="User Name">
+                            <input type="text" class="form-control input-sm change-width"  id="uid" required placeholder="User Name">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label for="certno">Certificate #: </label>
-                            <input type="text" class="form-control input-sm" id="certno" required>
+                            <!--<label for="certno">Certificate #: </label>-->
+                            <input type="text" class="form-control input-sm change-width" id="certno" placeholder="Certificate #" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label for="dob">Date of Birth (MM-DD-YYYY): </label>
-                            <input type="text" class="form-control input-sm" id="dob" required>
+                            <!--<label for="dob">Date of Birth (MM-DD-YYYY): </label>-->
+                            <input type="text" class="form-control input-sm change-width" placeholder="Date of Birth" id="dob" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label for="tele">Telephone: </label>
-                            <input type="text" class="form-control input-sm" id="tele" required>
+                            <!--<label for="tele">Telephone: </label>-->
+                            <input type="text" class="form-control input-sm change-width" id="tele" placeholder="Telephone" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label for="ssn">SSN (Last 4 digits): </label>
-                            <input type="text" class="form-control input-sm" id="ssn" maxlength="4" required>
+                            <!--<label for="ssn">SSN (Last 4 digits): </label>-->
+                            <input type="text" class="form-control input-sm change-width" id="ssn" maxlength="4" placeholder="SSN" required>
                         </div>
                     </div>
 
