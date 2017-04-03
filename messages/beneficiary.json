@@ -7,7 +7,7 @@
             "address": "123 ABC Dr Urbandale Iowa 12345",
             "phone": "9876543210",
             "certno": "000017111984",
-            "user_id": "john"
+            "user_id": "john@mercer.com"
         },
         {
             "name": "Anna",
@@ -16,7 +16,7 @@
             "address": "191-103 Integer Rd. Corona New Mexico 08219",
             "phone": "3333333333",
             "certno": "000012341234",
-            "user_id": "anna"
+            "user_id": "anna@mercer.com"
         },
         {
             "name": "Paul",

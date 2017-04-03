@@ -53,7 +53,7 @@ module.exports = [
 
         }
         else {
-            session.userData.retry_userid = parseInt(session.userData.retry_userid) + 1;
+            session.userData.retry_userid = session.userData.retry_userid ? parseInt(session.userData.retry_userid) + 1 : 1;
             if (parseInt(session.userData.retry_userid) > 2) {
                 session.beginDialog('maxretry');
             }

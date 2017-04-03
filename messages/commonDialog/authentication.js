@@ -56,7 +56,7 @@ module.exports = [
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <div id="lblmsg"></div>
+                            <div id="lblauthmsg"></div>
                         </div>
                     </div>
                 </div>
