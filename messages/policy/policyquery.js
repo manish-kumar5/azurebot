@@ -3,7 +3,12 @@ var builder = require('botbuilder');
 module.exports = [
     function (session, args, next) {
         if (session.userData && session.userData.username) {
-            builder.Prompts.text(session, session.userData.username + ", I will be happy to help you with your policy question. What would you like to know? (or you can select from the options below):");
+            builder.Prompts.text(session, session.userData.username + 
+            `, I will be happy to help you with your policy question. What would you like to know? (or you can select from the options below):<br>
+            <input type="button" onclick="hello(this)" value="Policy Information" id="Policy Information"><br>
+            <input type="button" onclick="hello(this)" value="Beneficiary Information" id="Beneficiary Information"><br>
+            <input type="button" onclick="hello(this)" value="Change History" id="Change History">`
+            );
             /*var DialogLabels = {
                 Policy_Information: 'Policy Information',
                 Beneficiary_Information: 'Beneficiary Information',
