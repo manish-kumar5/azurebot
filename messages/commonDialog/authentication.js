@@ -56,7 +56,7 @@ module.exports = [
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <div id="lblauthmsg"></div>
+                            <font color="red"><div id="lblauthmsg"></div></font>
                         </div>
                     </div>
                 </div>
