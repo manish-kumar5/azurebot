@@ -12,7 +12,7 @@ var spellService = require('./spell-service');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-//useEmulator = true;
+useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
@@ -50,7 +50,7 @@ bot.dialog('root', require('./commonDialog/root')).triggerAction({ matches: 'roo
 
 bot.dialog('payment', require('./payments/paymentquery')).triggerAction({ matches: 'payment' });
 
-bot.dialog('certificateinformation', require('./payments/certificatequery')).triggerAction({ matches: 'certificateinformation' });
+bot.dialog('certificatequery', require('./payments/certificatequery')).triggerAction({ matches: 'certificatequery' });
 
 bot.dialog('paymentoptionsquery', require('./payments/paymentoptionsquery')).triggerAction({ matches: 'paymentoptionsquery' });
 

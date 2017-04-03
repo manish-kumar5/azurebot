@@ -61,7 +61,7 @@ module.exports = [
     function(session, results){
         if(results.response){
             var resp = results.response;
-            session.endDialog();
+            //session.endDialog();
             if(resp == "Policy Information"){
                 session.beginDialog('policyinfo');
             }
@@ -72,7 +72,7 @@ module.exports = [
             }
         }
         else{
-            session.endDialog();
+            //session.endDialog();
             session.beginDialog('maxretry');
         }
     }

@@ -73,7 +73,7 @@ module.exports = [
                     containerHtml += '</time> </div> </div></div>';
         */
 
-        session.send(msg);
+        builder.Prompts.text(session, msg);
         //session.beginDialog('/');
     }
 ];
