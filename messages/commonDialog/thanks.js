@@ -32,7 +32,7 @@ module.exports = [
                                 <label class="star star-4" for="star-4"></label>
                             </form>
                             </div><br>
-                            <div>You gave a rating of <span id="count">0</span> star(s)</div>`,
+                            `,
                         "buttons": [
                             {
                                 "type": "postBack",
