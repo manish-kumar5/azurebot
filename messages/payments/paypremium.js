@@ -43,12 +43,11 @@ module.exports = [
     },
     function (session, results, next) {
         if (results.response) {
-
             if (results.response.toLowerCase() == "yes") {
-                builder.Prompts.text(session, 'Thank you. Your payment was approved. Your confirmation number is xxxxxx. <br><b> Do you have any further query?</b>');
+                builder.Prompts.text(session, '<p>Thank you. Your payment was approved. Your confirmation number is xxxxxx. <br><b> Do you have any further query?</b></p>');
 
             } else {
-                builder.Prompts.text(session, 'Do you have any further query?');
+                builder.Prompts.text(session, '<p>Do you have any further query?</p>');
             }
         }
     },
