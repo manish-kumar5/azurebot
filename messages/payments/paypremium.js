@@ -17,10 +17,16 @@ module.exports = [
                         </div>
                     </div>
 
+                    <div class ="form-group">
+                        <div class ="col-sm-12">
+                            <label class="control-label">Expiration Month and Year<br/></label>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <input type="text" class ="form-control input-sm change-width" id="expirationmonth" placeholder="Card Expiration Month(MM)" maxlength=2> /
-                            <input type="text" class ="form-control input-sm change-width" id="expirationyear" placeholder="Card Expiration Year(YY)" maxlength=2>
+                            <input type="text" class="form-control input-sm change-width-sm" id="expirationmonth" placeholder="MM" maxlength=2><br/>
+                            <input type="text" class="form-control input-sm change-width-sm" id="expirationyear" placeholder="YY" maxlength=2>
                         </div>
                     </div>
 
