@@ -113,9 +113,17 @@ module.exports = [
     },
     function (session, results) {
         if (results.response) {
-            session.userData.email = results.response;
-            builder.Prompts.text(session, 'I have sent you instructions on how to set your password to ' + session.userData.email + '. Is there anything else I can help you with?');
+            if(results.response.entity == "Yes"){
+                builder.Prompts.text(session, "How can i help you further?");
+            }
+            else if(results.response.entity == "No"){
+                session.beginDialog('thanks');
+            }
+            else{
+                session.userData.email = results.response;
+                builder.Prompts.text(session, 'I have sent you instructions on how to set your password to ' + session.userData.email + '. Is there anything else I can help you with?');
             //session.beginDialog('/');
+            }
         } else {
             //session.endDialog();
             session.beginDialog('maxretry');
