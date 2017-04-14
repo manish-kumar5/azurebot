@@ -54,7 +54,7 @@ bot.dialog('payment', require('./payments/paymentquery')).triggerAction({ matche
 
 bot.dialog('certificatequery', require('./payments/certificatequery')).triggerAction({ matches: 'certificatequery' });
 
-bot.dialog('paymentoptionsquery', require('./payments/paymentoptionsquery')).triggerAction({ matches: 'paymentoptionsquery' });
+bot.dialog('paymentoptionsquery', require('./payments/paypremium')).triggerAction({ matches: 'paymentoptionsquery' });
 
 bot.dialog('accountinfo', require('./payments/accountinfo')).triggerAction({ matches: 'accountinfo' });
 
