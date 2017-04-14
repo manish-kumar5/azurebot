@@ -8,7 +8,9 @@ module.exports = [
                     <div class="form-group">
                         <div class="col-sm-12">
                             <!--<label class ="control-label">I am able to accept a one time payment with a Visa or MasterCard.Plese provide your card number and the expiration date <br></label>-->
-                            <p>I am able to accept a one time payment with a Visa or MasterCard.Plese provide your card number and the expiration date</p>
+                            <div class="col-sm-3">
+                                <p>I am able to accept a one time payment with a Visa or MasterCard.Plese provide your card number and the expiration date</p>
+                            </div>
                         </div>
                     </div>
 
@@ -20,7 +22,10 @@ module.exports = [
 
                     <div class ="form-group">
                         <div class ="col-sm-12">
-                            <label class="control-label">Expiration Month and Year<br/></label>
+                            //<label class ="control-label">Expiration Month and Year<br/></label>
+                            <div class ="col-sm-3">
+                                <p>Expiration Month and Year</p>
+                            </div>
                         </div>
                     </div>
 
