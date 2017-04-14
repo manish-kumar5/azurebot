@@ -7,13 +7,14 @@ module.exports = [
                 <div class="container" id="paymentDetails">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label class="control-label">I am able to accept a one time payment with a Visa or MasterCard.Plese provide your card number and the expiration date <br></label>
+                            <!--<label class ="control-label">I am able to accept a one time payment with a Visa or MasterCard.Plese provide your card number and the expiration date <br></label>-->
+                            <p>I am able to accept a one time payment with a Visa or MasterCard.Plese provide your card number and the expiration date</p>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <input type="text" maxlength=16 class="form-control input-sm change-width"  id="cardnumber" required placeholder="Credit Card Number">
+                            <input type="text" maxlength=16 class="form-control input-sm change-width" id="cardnumber" required placeholder="Credit Card Number">
                         </div>
                     </div>
 
@@ -24,9 +25,25 @@ module.exports = [
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control input-sm change-width-sm" id="expirationmonth" placeholder="MM" maxlength=2><br/>
-                            <input type="text" class="form-control input-sm change-width-sm" id="expirationyear" placeholder="YY" maxlength=2>
+                        <div class="col-sm-1">
+                            <input type="text" class ="form-control input-sm change-width-sm" id="expirationmonth" placeholder="MM" maxlength=2>
+                        </div>
+
+                        <div class ="col-sm-11">
+                            <input type="text" class ="form-control input-sm change-width-sm" id="expirationyear" placeholder="YY" maxlength=2>
+                        </div>
+                    </div>
+
+                    <div class ="form-group">
+                        <div class ="col-sm-12">
+                            <!--<label class ="control-label">I am able to accept a one time payment with a Visa or MasterCard.Plese provide your card number and the expiration date <br></label>-->
+                            <p>Three digit security code</p>
+                        </div>
+                    </div>
+
+                    <div class ="form-group">
+                        <div class ="col-sm-12">
+                            <input type="text" maxlength=3 class ="form-control input-sm change-width-md" id="seccode" required placeholder="Security Digits">
                         </div>
                     </div>
 
@@ -59,7 +76,7 @@ module.exports = [
     },
     function (session, results) {
         if (results.response.toLowerCase() == "yes") {
-            session.beginDialog('paymentoptionsquery');
+            session.beginDialog('root');
         } else if (results.response.toLowerCase() == "no") {
             session.beginDialog('thanks');
         }

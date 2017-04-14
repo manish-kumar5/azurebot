@@ -5,7 +5,9 @@ module.exports = [
         if (session.userData && session.userData.username) {
             //var msg = 'Hi  ' + session.userData.username + '!!. How may I assist you?'
             //builder.Prompts.text(session, msg);
-            session.beginDialog('paymentoptionsquery');
+
+            // session.beginDialog('paymentoptionsquery');
+            session.beginDialog('paypremium')
         }
         else {
             session.userData.userStep = 'paymentoptionsquery';
