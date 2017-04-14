@@ -5,10 +5,7 @@ var compile = require("string-template/compile");
 
 var policyTemplate = compile(
     `<b> Policy details for certificate number {0} as follows: </b> 
-    <table border="0"> 
-        <tr> 
-            <td>Attributes </td><td>Value </td>
-        </tr>
+    <table border="1"> 
         <tr> 
             <td> Policy Name:</td><td>{1}</td>
         <tr>
@@ -54,53 +51,17 @@ module.exports = [
             session.userData.userStep = 'policyinfo';
             session.beginDialog('authentication');
          }
-        /*var msg = {
-            "type": "message",
-            "attachmentLayout": "carousel",
-            "text": "",
-            "attachments": [
-                {
-                    "contentType": "application/vnd.microsoft.card.hero",
-                    "content": {
-                        //"text": "Welcome to Mercer Bot! What can i help you with?",
-                        "title": "Policy Information",
-                        "subtitle": policy_info + `<br> Do you have any other questions regarding the policy?`,
-                        "buttons": [
-                            {
-                                "type": "postBack",
-                                "title": "Yes",
-                                "value": "Yes"
-                            },
-                            {
-                                "type": "postBack",
-                                "title": "No",
-                                "value": "No"
-                            }
-                        ]
-                    }
-                }
-            ]
-        }
-        builder.Prompts.choice(session, msg, ["Yes", "No"],
-            {
-                maxRetries: 3,
-                retryPrompt: 'Not a valid option'
-            });
-        */
     },
     function(session, results){
         if(results.response){
-            var resp = results.response.toLowerCase();
+            var resp = results.response.toLowerCase().trim();
             //session.endDialog();
-            if(resp === "yes"){
+            if(resp === "yes" || resp.indexOf("yes") > -1){
                 session.beginDialog('policyquery');
             }
-            if(resp == "no"){
+            if(resp === "no" || resp.indexOf("no") > -1){
                 session.beginDialog('thanks');
             }
-            //else {
-            //    session.beginDialog('/');
-           // }
         }
     }
 

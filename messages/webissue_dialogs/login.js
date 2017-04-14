@@ -64,8 +64,8 @@ module.exports = [
     },
     function (session, results) {
         if (results.response) {
-            var reset_resp = results.response.entity;
-            if (reset_resp == "No") {
+            var reset_resp = results.response.entity.toLowerCase().trim();
+            if (reset_resp === "no" || reset_resp.indexOf("no") > -1) {
                 var msg = {
                     "type": "message",
                     "attachmentLayout": "carousel",
@@ -102,7 +102,7 @@ module.exports = [
             } else {
                 session.beginDialog('validators:email', {
                     prompt: 'Please confirm the email address on file where I should send the instructions',
-                    retryPrompt: 'Invalie email. Please check and try again.',
+                    retryPrompt: 'Invalid email. Please check and try again.',
                     maxRetries: 3
                 });
             }
@@ -113,26 +113,28 @@ module.exports = [
     },
     function (session, results) {
         if (results.response) {
-            if(results.response.entity == "Yes"){
+
+            var resp = results.response.entity? results.response.entity: "";
+            resp = resp.toLowerCase().trim();
+            
+            if(resp === "yes"){
                 builder.Prompts.text(session, "How can i help you further?");
             }
-            else if(results.response.entity == "No"){
+            else if(resp == "no"){
                 session.beginDialog('thanks');
             }
             else{
                 session.userData.email = results.response;
                 builder.Prompts.text(session, 'I have sent you instructions on how to set your password to ' + session.userData.email + '. Is there anything else I can help you with?');
-            //session.beginDialog('/');
             }
         } else {
-            //session.endDialog();
             session.beginDialog('maxretry');
         }
     },
     function(session, results) {
         if(results.response){
-            var resp = results.response.toLowerCase();
-            if(resp == "no"){
+            var resp = results.response.toLowerCase().trim();
+            if(resp === "no" || resp.indexOf("no") > -1){
                 session.beginDialog('thanks');
             }
         }

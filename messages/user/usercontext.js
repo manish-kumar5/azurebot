@@ -3,7 +3,8 @@ var builder = require('botbuilder');
 module.exports = [
     function (session, args, next) {
         var usercontext = JSON.parse(session.message.text);
-        session.userData.username = usercontext.username;
+        session.userData.loginid = usercontext.username;
+        session.userData.username = usercontext.name;
         session.userData.ssn = usercontext.ssn;
         session.userData.telephone = usercontext.telephone;
         session.userData.certno = usercontext.cert;

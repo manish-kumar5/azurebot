@@ -74,6 +74,7 @@ module.exports = [
         */
 
         builder.Prompts.text(session, msg);
+        session.endDialog();
         //session.beginDialog('/');
     }
 ];
