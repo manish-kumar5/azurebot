@@ -23,7 +23,9 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 
 var bot = new builder.UniversalBot(connector);
 
-const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/d038ba40-63ff-4878-b1ae-c18c5cc11c9c?subscription-key=ae9a9c2ba8f34365acd7b032b42ba058&timezoneOffset=0.0&verbose=true&spellCheck=true&q=';
+const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/31405de0-f7c2-4e12-a23d-1a9a41e8c0f1?subscription-key=7f3caa5ead5c4b1aa323ec6ca520fa9f&verbose=true&timezoneOffset=0.0&spellCheck=true&q=';
+
+//'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/d038ba40-63ff-4878-b1ae-c18c5cc11c9c?subscription-key=ae9a9c2ba8f34365acd7b032b42ba058&timezoneOffset=0.0&verbose=true&spellCheck=true&q=';
 
 //'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/924eee0c-8ca1-49a4-b652-9ac5f7d09f9e?subscription-key=7c76b26278854cb1858bb06c58484982&verbose=true';
 
