@@ -39,9 +39,9 @@ bot.dialog('/', [
 ]);
 bot.dialog('usercontext', require('./user/usercontext')).triggerAction({ matches: 'usercontext' });
 bot.dialog('policyquery', require('./policy/policyquery')).triggerAction({ matches: 'policyquery' });
-bot.dialog('policyinfo', require('./policy/policyinfo')).triggerAction({ matches: 'policyinfo' });
-bot.dialog('beneficiaryinfo', require('./policy/beneficiaryinfo')).triggerAction({ matches: 'beneficiaryinfo' });
-bot.dialog('policychangehistory', require('./policy/policychangehistory')).triggerAction({ matches: 'policychangehistory' });
+bot.dialog('policy', require('./policy/policyinfo')).triggerAction({ matches: 'policy' });
+bot.dialog('beneficiary', require('./policy/beneficiaryinfo')).triggerAction({ matches: 'beneficiary' });
+bot.dialog('history', require('./policy/policychangehistory')).triggerAction({ matches: 'history' });
 
 bot.dialog('webissue', require('./webissue_dialogs/webissue')).triggerAction({ matches: 'webissue' });
 bot.dialog('webissue_login', require('./webissue_dialogs/login')).triggerAction({ matches: 'webissue_login' });
