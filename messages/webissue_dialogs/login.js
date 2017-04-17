@@ -4,7 +4,7 @@ var changecase = require('change-case');
 
 module.exports = [
     function (session, args, next) {
-        var login_msg = "I can help you with login. Please type your login ID";
+        var login_msg = "I can help you with login. Please type login ID for which you need help";
         var retry_msg = "Oops!! The userid provided by you does not match our records. Please check and provide again.";
         if (parseInt(session.userData.retry_userid) > 0) {
             builder.Prompts.text(session, retry_msg);

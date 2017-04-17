@@ -12,13 +12,14 @@ module.exports = [
         session.userData.address = usercontext.address;
         session.userData.dob = usercontext.dob;
         session.userData.validation = true;
+    
 
 
         var returnMsg = '<div>Thanks for confirming the details. Verification has been completed succesfully.</div>';
 
         /// If user came from a specific workflow redirect post verification.
 
-        if (session.userData.userStep) {
+        if (usercontext.autologin === "y" && session.userData.userStep) {
             // session.send(returnMsg);
             session.beginDialog(session.userData.userStep);
         }
