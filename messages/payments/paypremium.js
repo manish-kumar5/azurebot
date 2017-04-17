@@ -1,5 +1,6 @@
 var builder = require('botbuilder');
 var store = require('../store');
+var changecase = require('change-case');
 
 module.exports = [
     function (session, args, next) {
@@ -71,7 +72,7 @@ module.exports = [
     },
     function (session, results, next) {
         if (results.response) {
-            if (results.response.toLowerCase() == "yes") {
+            if (changecase.lowerCase(results.response) == "yes") {
                 builder.Prompts.text(session, '<p>Thank you. Your payment was approved. Your confirmation number is xxxxxx. <br><b> Do you have any further query?</b></p>');
 
             } else {
@@ -80,9 +81,9 @@ module.exports = [
         }
     },
     function (session, results) {
-        if (results.response.toLowerCase() == "yes") {
+        if (changecase.lowerCase(results.response) == "yes") {
             session.beginDialog('root');
-        } else if (results.response.toLowerCase() == "no") {
+        } else if (changecase.lowerCase(results.response) == "no") {
             session.beginDialog('thanks');
         }
     }

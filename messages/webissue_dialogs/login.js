@@ -1,5 +1,6 @@
 var builder = require('botbuilder');
 var store = require('../store');
+var changecase = require('change-case');
 
 module.exports = [
     function (session, args, next) {
@@ -64,7 +65,7 @@ module.exports = [
     },
     function (session, results) {
         if (results.response) {
-            var reset_resp = results.response.entity.toLowerCase().trim();
+            var reset_resp = changecase.lowerCase(results.response.entity);
             if (reset_resp === "no" || reset_resp.indexOf("no") > -1) {
                 var msg = {
                     "type": "message",
@@ -115,7 +116,7 @@ module.exports = [
         if (results.response) {
 
             var resp = results.response.entity? results.response.entity: "";
-            resp = resp.toLowerCase().trim();
+            resp = changecase.lowerCase(resp);
             
             if(resp === "yes"){
                 builder.Prompts.text(session, "How can i help you further?");
@@ -133,7 +134,7 @@ module.exports = [
     },
     function(session, results) {
         if(results.response){
-            var resp = results.response.toLowerCase().trim();
+            var resp = changecase.lowerCase(results.response);
             if(resp === "no" || resp.indexOf("no") > -1){
                 session.beginDialog('thanks');
             }

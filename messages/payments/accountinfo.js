@@ -2,6 +2,7 @@ var builder = require('botbuilder');
 var store = require('../store');
 var format = require("string-template");
 var compile = require("string-template/compile");
+var changecase = require('change-case');
 
 var beneficiaryTemplate = compile(
     `<b>Beneficiary details as follows:</b>
@@ -37,7 +38,7 @@ module.exports = [
     },
     function (session, results) {
         if (results.response) {
-            var resp = results.response.toLowerCase();
+            var resp = changecase.lowerCase(results.response);
             //session.endDialog();
             if (resp == "yes") {
                 session.beginDialog('paymentoptionsquery');

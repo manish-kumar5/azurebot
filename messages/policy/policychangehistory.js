@@ -2,6 +2,7 @@ var builder = require('botbuilder');
 var store = require('../store');
 var format = require("string-template");
 var compile = require("string-template/compile");
+var changecase = require('change-case');
 
 var historyTemplate = compile(
 `
@@ -41,7 +42,7 @@ module.exports = [
     },
     function(session, results){
         if(results.response){
-            var resp = results.response.toLowerCase().trim();
+            var resp = changecase.lowerCase(results.response);
             //session.endDialog();
             if(resp == "yes" || resp.indexOf("yes") > -1){
                 session.beginDialog('policyquery');
