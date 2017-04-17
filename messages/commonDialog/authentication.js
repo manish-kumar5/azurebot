@@ -7,7 +7,7 @@ module.exports = [
                 <div class="container" id="authDetails">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <p>I will be happy to assist. First, for verification, may I please have your details</p>
+                            <label><p>I will be happy to assist. First, for verification, may I please have your details<br></label>
                         </div>
                     </div>
 
