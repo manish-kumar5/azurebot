@@ -6,8 +6,8 @@ module.exports = [
             <!--<form role="form">-->
                 <div class="container" id="authDetails">
                     <div class="form-group">
-                        <div class="col-sm-12">
-                            I will be happy to assist. First, for verification, may I please have your details<br>
+                        <div class="col-sm-4">
+                            <p>I will be happy to assist. First, for verification, may I please have your details</p><br>
                         </div>
                     </div>
 
