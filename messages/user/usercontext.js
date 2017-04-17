@@ -19,7 +19,7 @@ module.exports = [
 
         /// If user came from a specific workflow redirect post verification.
 
-        if (usercontext.autologin === "y" && session.userData.userStep) {
+        if (usercontext.autologin === "n" && session.userData.userStep) {
             // session.send(returnMsg);
             session.beginDialog(session.userData.userStep);
         }
