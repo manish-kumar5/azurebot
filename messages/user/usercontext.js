@@ -15,7 +15,7 @@ module.exports = [
     
 
 
-        var returnMsg = '<div>Thanks for confirming the details. Verification has been completed succesfully.</div>';
+        var returnMsg = '<div>Thanks for confirming the details. Verification has been completed succesfully. How may I assist you?</div>';
 
         /// If user came from a specific workflow redirect post verification.
 

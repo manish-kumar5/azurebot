@@ -23,7 +23,6 @@ module.exports = [
 
                     <div class ="form-group">
                         <div class ="col-sm-12">
-                            //<label class ="control-label">Expiration Month and Year<br/></label>
                             <div class ="col-sm-3">
                                 <p>Expiration Month and Year</p>
                             </div>
