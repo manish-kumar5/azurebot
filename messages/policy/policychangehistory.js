@@ -35,7 +35,7 @@ module.exports = [
             }
             builder.Prompts.text(session, msg_history + `<br> Do you have any other questions regarding the policy?`);
         }else{
-            session.userData.userStep = 'policychangehistory';
+            session.userData.userStep = 'history';
             session.beginDialog('authentication');
         }
     },

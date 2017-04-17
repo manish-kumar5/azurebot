@@ -34,7 +34,7 @@ module.exports = [
             }
             builder.Prompts.text(session, beninfo + `<br> Do you have any other questions regarding the policy?`);
         }else{
-            session.userData.userStep = 'beneficiaryinfo';
+            session.userData.userStep = 'beneficiary';
             session.beginDialog('authentication');
         }
     },
