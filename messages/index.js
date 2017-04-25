@@ -23,7 +23,8 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 
 var bot = new builder.UniversalBot(connector);
 
-const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/31405de0-f7c2-4e12-a23d-1a9a41e8c0f1?subscription-key=7f3caa5ead5c4b1aa323ec6ca520fa9f&verbose=true&timezoneOffset=0.0&spellCheck=true&q=';
+const LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/e84800b9-71c8-427a-8293-3753fdef91d0?subscription-key=28157a31efd94502b9b3d73cb9342830&verbose=true&timezoneOffset=0&q=';
+//'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/31405de0-f7c2-4e12-a23d-1a9a41e8c0f1?subscription-key=7f3caa5ead5c4b1aa323ec6ca520fa9f&verbose=true&timezoneOffset=0.0&spellCheck=true&q=';
 
 //'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/d038ba40-63ff-4878-b1ae-c18c5cc11c9c?subscription-key=ae9a9c2ba8f34365acd7b032b42ba058&timezoneOffset=0.0&verbose=true&spellCheck=true&q=';
 
@@ -34,7 +35,8 @@ bot.recognizer(recognizer);
 
 bot.dialog('/', [
     function (session, args, next) {
-        builder.Prompts.text(session, "Sorry!! I didn't understand. Please try again.");
+        var user = session.userData.username? session.userData.username: "";
+        builder.Prompts.text(session, "I’m sorry, <b>" + user  + " </b>. I don’t yet understand all the commands, but you can ask me to help you with policy questions, making a payment, or login");
     }
 ]);
 bot.dialog('usercontext', require('./user/usercontext')).triggerAction({ matches: 'usercontext' });
@@ -69,7 +71,7 @@ bot.library(require('./validators').createLibrary());
 
 var instructions = `<b> <p>I am BEN, your AI support specialist. What can I help you with today?</p></b> <br> I can answer questions related to your policy,
  help you make a payment, or assist with login. To make things easier you can also choose from the options below<br>
-        <input type="button" onclick="hello(this)" value="Policy Question" id="Policy Query"><br>
+        <input type="button" onclick="hello(this)" value="Policy Query" id="Policy Query"><br>
         <input type="button" onclick="hello(this)" value="Make A Payment" id="Payment"><br>
         <input type="button" onclick="hello(this)" value="Login Help" id="Invalid Login">`;
 
